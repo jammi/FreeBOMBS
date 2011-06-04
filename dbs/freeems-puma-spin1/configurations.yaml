@@ -59,7 +59,7 @@ extras:
     components:
       - 
     checked: false
-  - id: USB-CONN1
+  - id: USB-CONN2
     title: USB connector kit A to B
     description: |
       This option is disabled by default, because you will probably
