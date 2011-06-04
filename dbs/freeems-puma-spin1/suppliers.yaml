@@ -1,0 +1,7 @@
+digikey:
+  title: DigiKey
+  homepage: http://www.digikey.com/
+## this entry is not defined, as no supply information for it is defined in the components yet
+# farnell:
+#   title: Farnell
+#   homepage: http://www.farnell.com/

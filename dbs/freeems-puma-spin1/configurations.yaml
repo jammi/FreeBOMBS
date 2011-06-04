@@ -1,0 +1,328 @@
+
+title: FreeEMS Puma Spin 1
+description: |
+  # Introduction
+  This BOM is highly experimental, proceed at your own risk!
+  The baseline configuration includes only a set of bare minimum parts.
+components:
+  - 'MCR10EZPF1001'
+  - 'RSF200JB-1R0'
+  - '52000001009'
+  - [ 11, 'RMCF0805FT10K0' ]
+  - [ 2, 'RMCF0805JT10M0' ]
+  - 'RMCF0805JT22K0'
+  - 'MCR10EZPF3902'
+  - [ 12, 'GRM21BR71H104KA01L' ]
+  - [ 9, 'RMCF0805JT1K60' ]
+  - [ 2, 'UVZ1C100MDD' ]
+  - [ 2, '500R15N220JV4T' ]
+  - [ 2, 'TAJC226M016RNJ' ]
+  - [ 2, 'RMCF0805JT270R' ]
+  - [ 2, 'MCR10EZPF3901' ]
+  - [ 4, '08055C333KAZ2A' ]
+  - [ 2, 'RMCF0805JT4K70' ]
+  - [ 2, 'LH R974-LP-1-0-20-R18' ]
+  - [ 8, 'CC0805KRX7R9BB152' ]
+  - 'NX3225SA 16MHZ AT-W'
+  - '500R15W332KV4T'
+  - 'CC0805KRX7R9BB331'
+  - 'UE27AC54100'
+  - [ 3, '1N4007-T' ]
+  - '1N4148W-TP'
+  - 'EKZE6R3ELL222MJ25S'
+  - [ 2, 'LM2940T-5.0/NOPB' ]
+  - 'FT232RL-REEL'
+  - 'LM2937IMP-5.0/NOPB'
+  - 'MC9S12XDP512MAL'
+  - 'AK670/2-1-R'
+extras:
+  - id: RECOMMENDED
+    title: Recommended baseline parts
+    description: |
+      Don't uncheck this, unless you know what you are doing!
+    checked: true
+    value: 1
+    min: 0
+    max: 1
+    components:
+      - 'UDQ2916LBTR-T'
+      - [ 4, 'MCR10EZPF1001' ]
+      - [ 2, 'RSF200JB-1R0' ]
+      - [ 4, 'GRM21BR71H104KA01L' ]
+      - [ 4, 'RMCF0805JT1K60' ]
+      - 74HC86DR2G
+  - id: USB-CONN1
+    title: USB connector kit A to A
+    description: |
+      This option is disabled by default, because you will probably
+      make a custom USB assembly.
+    components:
+      - 
+    checked: false
+  - id: USB-CONN1
+    title: USB connector kit A to B
+    description: |
+      This option is disabled by default, because you will probably
+      make a custom USB assembly.
+    components:
+      - 
+    checked: false
+  - id: INJ-H
+    title: High-Z injector circuit configuration
+    description: |
+      Enter the number of injector drivers you want to use.
+    presets:
+      - title: "Low-Z injector system or ignition only"
+        value: 0
+      - title: "1-cylinder engine"
+        value: 1
+      - title: "2-cylinder engine, bank injection (SPI)"
+        value: 1
+      - title: "2-cylinder engine, sequential injection"
+        value: 2
+      - title: "4-cylinder engine, bank injection (SPI)"
+        value: 1
+      - title: "4-cylinder engine, semi-sequential injection"
+        value: 2
+      - title: "4-cylinder engine, sequential injection"
+        value: 4
+      - title: "8-cylinder engine, semi-sequential injection"
+        value: 4
+    checked: true
+    excludes: INJ-L
+    value: 0
+    min: 0
+    max: 8
+    components:
+      - 'VNP20N07'
+  - id: INJ-L
+    title: Low-Z injector circuit configuration
+    description: |
+      Enter the number of injector drivers you want to use.
+    presets:
+      - title: "High-Z injector system or ignition only"
+        value: 0
+      - title: "1-cylinder engine"
+        value: 1
+      - title: "2-cylinder engine, bank injection (SPI)"
+        value: 1
+      - title: "2-cylinder engine, sequential injection"
+        value: 2
+      - title: "4-cylinder engine, bank injection (SPI)"
+        value: 1
+      - title: "4-cylinder engine, semi-sequential injection"
+        value: 2
+      - title: "4-cylinder engine, sequential injection"
+        value: 4
+      - title: "8-cylinder engine, semi-sequential injection"
+        value: 4
+    checked: false
+    excludes: INJ-H
+    value: 0
+    min: 0
+    max: 8
+    components:
+      - 'RMCF0805JT1K60'
+      - 'MCR10EZPF3901'
+      - 'GRM216R71H103KA01D'
+      - 'WHCR10FET'
+      - '2N6045G'
+      - '1N5364BRLG'
+      - 'LM1949N/NOPB'
+  - id: IGN
+    title: Ignition circuit configuration
+    description: |
+      Enter the number of ignition drivers you want to use.
+    presets:
+      - title: "Fuel-only"
+        value: 0
+      - title: "Distributor or single-cylinder engine"
+        value: 1
+      - title: "Sequential for 2-cylinder engines"
+        value: 2
+      - title: "Wasted spark for 4-cylinder engines"
+        value: 2
+      - title: "Sequential for 4-cylinder engines"
+        value: 4
+    checked: false
+    value: 0
+    min: 0
+    max: 4
+    components:
+      - 'MCR10EZPF1001'
+      - 'RMCF0805FT10K0'
+      - 'RMCF0805JT1K60'
+      - 'LH R974-LP-1-0-20-R18'
+      - 'VNP20N07'
+  - id: RPM
+    title: RPM input circuits
+    description: |
+      You will need at least one RPM input for yaur engine to work.
+    presets:
+      - title: Single RPM input
+        value: 1
+      - title: "Dual RPM input, like crank + cam"
+        value: 2
+    checked: true
+    value: 1
+    min: 0
+    max: 2
+    components:
+      - [ 3, 'RMCF0805FT10K0' ]
+      - 'GRM21BR71H104KA01L'
+      - 'GRM216R71H103KA01D'
+      - 'MAX9924UAUB+'
+  - id: MAPB
+    title: Boosted MAP input circuits and MAP sensor
+    description: |
+      You don't need this, unless you are going to read boost levels from a supercharger or turbo. It includes an MPX4250AP sensor.
+    checked: false
+    excludes:
+      - MAPN
+      - MAF
+    value: 0
+    min: 0
+    max: 1
+    components:
+      - 'RMCF0805JT68K0'
+      - 'GRM21BR71H104KA01L'
+      - '08055C333KAZ2A'
+      - 'ERJ-6GEYJ684V'
+      - 'CC0805KRX7R9BB152'
+      - 'MPX4250AP'
+  - id: MAPN
+    title: Regular vacuum MAP sensor and its input circuit.
+    description: |
+      You'll want this to read the vacuum levels from your inlet manifold. It includes an MPX4100AP sensor.
+    checked: true
+    excludes:
+      - MAPB
+      - MAF
+    value: 1
+    min: 0
+    max: 1
+    components:
+      - 'RMCF0805JT68K0'
+      - 'GRM21BR71H104KA01L'
+      - '08055C333KAZ2A'
+      - 'ERJ-6GEYJ684V'
+      - 'CC0805KRX7R9BB152'
+      - 'MPX4100AP'
+  - id: AAP
+    title: Ambient air pressure sensor and its input circuit.
+    description: |
+      You'll want this in most cases. It's used for normalization of the MAP vs atmospheric pressure. It includes an MPX4100A sensor.
+    checked: true
+    value: 1
+    min: 0
+    max: 1
+    components:
+      - 'GRM21BR71H104KA01L'
+      - 'GRM216R71H103KA01D'
+      - 'MPX4100A'
+  - id: MAF
+    title: Mass air flow sensor circuit
+    description: |
+      This is an alternative to the MAP sensor.
+    checked: false
+    excludes:
+      - MAPN
+      - MAPB
+    value: 0
+    min: 0
+    max: 1
+    components:
+      - 'RMCF0805FT10K0'
+      - 'ERJ-6GEYJ684V'
+  - id: GPO
+    title: General-purpose output
+    description: |
+      It's not known, whether this circuit works or not.
+    checked: false
+    value: 0
+    min: 0
+    max: 2
+    components:
+      - 'RMCF0805JT1K60'
+      - 'RMCF0805JT100K'
+      - 'CC0805JRNP09BN100'
+      - 'VNP20N07'
+  - id: O2
+    title: Lambda sensor input circuits
+    description: |
+      ## NOTE: Includes no parts!
+      Wide-band lambda sensor input. A narrow-band lambda probe is not supported.
+    checked: true
+    value: 1
+    min: 0
+    max: 1
+  - id: EGT
+    title: Thermocouple driver IC
+    description: |
+      This option is not supported properly, so don't check this option.
+      * In Spin1, this one is a bit crippled.
+        * It only supports up to 500°C temperatures as-it's currently configured.
+        * The EGT would support up to 1200°C, if it would be supplied with 12V instead of 5V
+    checked: false
+    value: 0
+    min: 0
+    max: 1
+    components:
+      - 'GRM21BR71H104KA01L'
+      - 'AD8497ARMZ'
+  - id: TCPL
+    title: Thermistor filtering circuits
+    description: |
+      ## NOTE: Includes no parts!
+      In most cases, you'll use two:
+      * One for the inlet air temperature sensor.
+      * Another for the coolant temperature sensor.
+    checked: true
+    value: 2
+    min: 0
+    max: 4
+  - id: AN
+    title: General purpose analog inputs
+    description: |
+      ## NOTE: Includes no parts!
+      Not supported.
+    checked: false
+    value: 0
+    min: 0
+    max: 1
+  - id: STP
+    title: Stepper driver
+    description: |
+      ## NOTE: Includes no parts!
+      Untested and no firmware support.
+    checked: false
+    value: 0
+    min: 0
+    max: 1
+  - id: ANP
+    title: Analog protection circuits
+    description: |
+      ## Keep this enabled with a quantity of 16 at all times, unless you know what you are doing!
+      Protection diodes (Schottky, SOD123 package). This way the board is protected against voltage spikes and other harmful stuff.
+    checked: true
+    value: 16
+    min: 0
+    max: 16
+    components:
+      - [ 2, 'MCR10EZPF1001' ]
+      - 'GRM21BR71H104KA01L'
+      - '1N4148W-TP'
+      - 'MBR0520L'
+  - id: DGP
+    title: Digital protection circuits
+    description: |
+      ## Keep this disabled at all times, unless you know what you are doing!
+      Protection zeners (5v1, SOD123 package). Has some known issues.
+    checked: false
+    value: 0
+    min: 0
+    max: 12
+    components:
+      - 'BZT52C5V1-7-F'
+      - 'RMCF0805JT1K60'
+      - '1N4148W-TP'

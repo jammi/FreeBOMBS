@@ -1,0 +1,711 @@
+# the top-level keys are manufacturer part numbers
+'UDQ2916LBTR-T':
+  title: Dual Full-Bridge PWM Motor Driver
+  vendor: Allegro Microsystems Inc
+  category: IC
+  mounting: SMD
+  voltage:
+    supply: [ 4.75, 5.25 ]
+    load: [ 10, 45 ]
+  current: 0.750 # A
+  temperature: [ -40, 105 ]
+  datasheet: http://www.allegromicro.com/en/Products/Part_Numbers/2916/2916.pdf
+  image: http://media.digikey.com/Renders/~~Pkg.Case%20or%20Series/24-SOIC.jpg
+  suppliers:
+    digikey:
+      part: '620-1158-2-ND'
+      price: [ 4.48, USD ]
+'MCR10EZPF1001':
+  title: Compact Thick Film Chip Resistor
+  category: R
+  mounting: SMD
+  resistance: 1000 # Ohm
+  current: 2 # A
+  power: 0.125 # W
+  temperature: [ -55, 155 ]
+  datasheet: http://www.rohm.com/products/databook/r/pdf/mcr10.pdf
+  suppliers:
+    digikey:
+      part: 'RHM1.00KCRDKR-ND'
+      price: [ 0.042, USD ]
+'RSF200JB-1R0':
+  title: Metal Oxide Film Resistor (Flame-Proof)
+  vendor: Yaego
+  category: R
+  mounting: THD
+  resistance: 1 # Ohm
+  power: 2 # W
+  temperature: [ -55, 235 ]
+  datasheet: http://www.yageo.com/documents/recent/Leaded-R_RSF_2011.pdf
+  suppliers:
+    digikey:
+      part: '1.0W-2-ND'
+      price: [ 0.21, USD ]
+'52000001009':
+  title: Fuse Clip (not included)
+  obsolete: true
+'RMCF0805FT10K0':
+  title: General Purpose Thick Film Chip Resistor
+  vendor: Stackpole Electronics Inc (VA)
+  category: R
+  mounting: SMD
+  resistance: 10000 # Ohm; 10k
+  power: 0.125 # W
+  tepmerature: [ -65, 155 ]
+  datasheet: http://www.seielect.com/Catalog/SEI-RMC.pdf
+  suppliers:
+    digikey:
+      part: 'RMCF0805FT10K0CT-ND'
+      price: [ 0.04, USD ] # price break 1
+'RMCF0805JT10M0':
+  title: General Purpose Thick Film Chip Resistor
+  vendor: Stackpole Electronics Inc (VA)
+  category: R
+  mounting: SMD
+  resistance: 10000000 # Ohm; 10M
+  power: 0.125 # W
+  tepmerature: [ -65, 155 ]
+  datasheet: http://www.seielect.com/Catalog/SEI-RMC.pdf
+  suppliers:
+    digikey:
+      part: 'RMCF0805JT10M0-ND'
+      price: [ 0.0019, USD ] # price break 5000
+'RMCF0805JT22K0':
+  title: General Purpose Thick Film Chip Resistor
+  vendor: Stackpole Electronics Inc (VA)
+  category: R
+  mounting: SMD
+  resistance: 22000 # Ohm; 22k
+  power: 0.125 # W
+  temperature: [ -65, 155 ]
+  datasheet: http://www.seielect.com/Catalog/SEI-RMC.pdf
+  suppliers:
+    digikey:
+      part: 'RMCF0805JT22K0-ND'
+      price: [ 0.0019, USD ] # price break 5000
+'MCR10EZPF3902':
+  title: SMD resistor 39k
+  category: R
+  mounting: SMD
+  resistance: 39000 # Ohm; 29k
+  power: 0.125 # W
+  datasheet: http://www.rohm.com/products/databook/r/pdf/mcr10.pdf
+  suppliers:
+    digikey:
+      part: 'RHM39.0KCRDKR-ND'
+      price: [ 0.042, USD ] # price break 10
+'BZT52C5V1-7-F':
+  title: Zener diode 5.1V 500mW
+  category: ZD # Zener Diodes
+  mounting: SMD
+  impedance: 60 # Ohm; max
+  temperature: [ -65, 150 ]
+  voltage: 
+    forward: 0.9 # max; 900mV @ 10mA
+  datasheet: http://www.diodes.com/datasheets/ds18004.pdf
+  suppliers:
+    digikey:
+      part: 'BZT52C5V1-FDICT-ND'
+      price: [ 0.38, USD ] # price break 1
+'RMCF0805JT68K0':
+  title: General Purpose Thick Film Chip Resistor
+  vendor: Stackpole Electronics Inc (VA)
+  category: R
+  mounting: SMD
+  resistance: 68000 # Ohm; 68k
+  power: 0.125 # W
+  temperature: [ -65, 155 ]
+  datasheet: http://www.seielect.com/Catalog/SEI-RMC.pdf
+  suppliers:
+    digikey:
+      part: 'RMCF0805JT68K0-ND'
+      price: [ 0.0019, USD ] # price break 5000
+'GRM21BR71H104KA01L':
+  title: Chip Monolithic Ceramic Capacitor
+  category: C # caps
+  mounting: SMD
+  capacitance: 0.1µF
+  voltage:
+    rated: 50
+  temperature: [ -55, 125 ]
+  datasheet: http://search.murata.co.jp/Ceramy/image/img/w_hinm/L0005E.pdf
+  suppliers:
+    digikey:
+      part: '490-1666-1-ND'
+      price: [ 0.15, USD ] # price break 1
+'RMCF0805JT1K60':
+  title: General Purpose Thick Film Chip Resistor
+  vendor: Stackpole Electronics Inc (VA)
+  category: R
+  mounting: SMD
+  resistance: 1600 # Ohm; 1.6k
+  power: 0.125 # W
+  temperature: [ -65, 155 ]
+  datasheet: http://www.seielect.com/Catalog/SEI-RMC.pdf
+  suppliers:
+    digikey:
+      part: 'RMCF0805JT1K60TR-ND'
+      price: [ 0.019, USD ] # price break 5000
+'RMCF0805JT100K':
+  title: General Purpose Thick Film Chip Resistor
+  vendor: Stackpole Electronics Inc (VA)
+  category: R
+  mounting: SMD
+  resistance: 100000 # Ohm; 100k
+  power: 0.125 # W
+  temperature: [ -65, 155 ]
+  datasheet: http://www.seielect.com/Catalog/SEI-RMC.pdf
+  suppliers:
+    digikey:
+      part: 'RMCF0805JT100KCT-ND'
+      price: [ 0.03, USD ] # price break 1
+'CC0805JRNP09BN100':
+  title: Ceramic Capacitor
+  vendor: Yageo
+  category: C
+  mounting: SMD
+  capacitance: 10pF
+  voltage:
+    rated: 50
+  datasheet: http://www.yageo.com/documents/recent/UPY-GP_NP0_16V-to-50V_6.pdf
+  suppliers:
+    digikey:
+      part: '311-1099-1-ND'
+      price: [ 0.069, USD ] # price break 10
+'UVZ1C100MDD':
+  title: Aluminium Electrolytic Capacitor
+  vendor: Nichicon
+  category: C
+  mounting: THD
+  capacitance: 10µF
+  voltage:
+    rated: 16
+  datasheet: http://nichicon-us.com/english/products/pdf/e-vz.pdf
+  suppliers:
+    digikey:
+      part: '493-1279-ND'
+      price: [ 0.25, USD ] # price break 1
+'MCR10EZPF2201':
+  title: Compact Thick Field Chip Resistor
+  vendor: Rohm Semiconductor
+  category: R
+  mounting: SMD
+  resistance: 2200 # Ohm; 2.2k
+  power: 0.125
+  temperature: [ -55, 155 ]
+  datasheet: http://www.rohm.com/products/databook/r/pdf/mcr10.pdf
+  suppliers:
+    digikey:
+      part: 'RHM2.20KCRCT-ND'
+      price: [ 0.042, USD ] # price break 10
+'500R15N220JV4T':
+  title: Ceramic Capacitor
+  vendor: Johanson Dielectrics Inc
+  category: C
+  mounting: SMD
+  capacitance: 22pF
+  voltage:
+    rated: 50
+  temperature: [ -55, 125 ]
+  datasheet: http://www.johansondielectrics.com/images/stories/surface-mount/smt-mlc/JDI_Surface-Mount_2008-11.pdf
+  suppliers:
+    digikey:
+      part: '709-1172-1-ND'
+      price: [ 0.044, USD ] # price break 10
+'TAJC226M016RNJ':
+  title: Tantalum Capacitor
+  vendor: AVX Corporation
+  category: C
+  mounting: SMD
+  capacitance: 22µF
+  voltage:
+    rated: 16
+  resistance: 1 # ESR 1.000 Ohm
+  temperature: [ -55, 125 ]
+  datasheet: http://www.avx.com/docs/Catalogs/taj.pdf
+  suppliers:
+    digikey:
+      part: '478-3901-1-ND'
+      price: [ 0.41, USD ] # price break
+'RMCF0805JT270R':
+  title: General Purpose Thick Film Chip Resistor
+  vendor: Stackpole Electronics Inc (VA)
+  category: R
+  mounting: SMD
+  resistance: 270 # Ohm; 270
+  power: 0.125 # W
+  temperature: [ -65, 155 ]
+  datasheet: http://www.seielect.com/Catalog/SEI-RMC.pdf
+  suppliers:
+    digikey:
+      part: 'RMCF0805JT270RCT-ND'
+      price: [ 0.03, USD ] # price break 1
+'MCR10EZPF3301':
+  title: Compact Thick Field Chip Resistor
+  vendor: Rohm Semiconductor
+  category: R
+  mounting: SMD
+  resistance: 3300 # Ohm; 3.3k
+  power: 0.125
+  temperature: [ -55, 155 ]
+  datasheet: http://www.rohm.com/products/databook/r/pdf/mcr10.pdf
+  suppliers:
+    digikey:
+      part: 'RHM3.30KCRCT-ND'
+      price: [ 0.042, USD ] # price break 10
+'MCR10EZPF3901':
+  title: Compact Thick Field Chip Resistor
+  vendor: Rohm Semiconductor
+  category: R
+  mounting: SMD
+  resistance: 3900 # Ohm; 3.9k
+  power: 0.125
+  temperature: [ -55, 155 ]
+  datasheet: http://www.rohm.com/products/databook/r/pdf/mcr10.pdf
+  suppliers:
+    digikey:
+      part: 'RHM3.90KCRCT-ND'
+      price: [ 0.042, USD ] # price break 10
+'08055C333KAZ2A':
+  title: Ceramic Capacitor
+  vendor: AVX Corporation
+  category: C
+  mounting: SMD
+  capacitance: 0.033µF
+  voltage:
+    rated: 50
+  temperature: [ -55, 125 ]
+  datasheet: http://www.avx.com/docs/catalogs/flexiterm.pdf 
+  suppliers:
+    digikey:
+      part: '478-3550-1-ND'
+      price: [ 0.49, USD ] # price break 10
+'RMCF0805JT4K70':
+  title: General Purpose Thick Film Chip Resistor
+  vendor: Stackpole Electronics Inc (VA)
+  category: R
+  mounting: SMD
+  resistance: 4700 # Ohm; 4.7k
+  power: 0.125 # W
+  temperature: [ -65, 155 ]
+  datasheet: http://www.seielect.com/Catalog/SEI-RMC.pdf
+  suppliers:
+    digikey:
+      part: 'RMCF0805JT4K70CT-ND'
+      price: [ 0.03, USD ] # price break 1
+'ERJ-6GEYJ684V':
+  title: Thick Film Chip Resistor
+  vendor: Panasonic
+  category: R
+  mounting: SMD
+  resistance: 680000 # Ohm; 680k
+  power: 0.125
+  temperature: [ -55, 155 ]
+  datasheet: http://industrial.panasonic.com/www-data/pdf/AOA0000/AOA0000PE34.pdf
+  suppliers:
+    digikey:
+      part: 'P680KACT-ND'
+      price: [ 0.04, USD ] # price break 1
+'GRM216R71H103KA01D':
+  title: Chip Monolithic Ceramic Cap
+  vendor: Murata
+  category: C
+  mounting: SMD
+  capacitance: 10000pF
+  voltage:
+    rated: 50V
+  temperature: [ -55, 125 ]
+  datasheet: http://www.murata.com/products/catalog/pdf/c02e.pdf
+  suppliers:
+    digikey:
+      part: '490-1664-1-ND'
+      price: [ 0.1, USD ] # price break 1
+'LH R974-LP-1-0-20-R18':
+  title: RH Chip LED (RED)
+  vendor: OSRAM
+  category: LED
+  mounting: SMD
+  color: red
+  wavelength: 645 #nm
+  datasheet: http://catalog.osram-os.com/jsp/download.jsp?name=LH_R974.pdf&url=/media/_en/Graphics/00042077_0.pdf
+  suppliers:
+    digikey:
+      part: '475-1415-1-ND'
+      price: [ 0.11, USD ] # price break 1
+'CC0805KRX7R9BB152':
+  title: Ceramic Capacitor
+  vendor: Yageo
+  category: C
+  mounting: SMD
+  capacitance: 1500pF
+  voltage:
+    rated: 50
+  temperature: [ -55, 125 ]
+  datasheet: http://media.digikey.com/pdf/Data%20Sheets/Yageo%20PDFs/MLCC%20ordering%20code.pdf
+  suppliers:
+    digikey:
+      part: '311-1128-1-ND'
+      price: [ 0.067, USD ] # price break 10
+'NX3225SA 16MHZ AT-W':
+  title: 16MHz Crystal
+  vendor: NDK
+  category: OSC # Crystals and oscillators
+  mounting: SMD
+  frequency: 16MHz
+  capacitance:
+    load: 8pF
+  temperature: [ -40, 125 ]
+  datasheet: http://media.digikey.com/pdf/Data%20Sheets/NDK%20PDFs/NX3225SA%20EXS00A-CS03326.pdf
+  image: http://media.digikey.com/photos/NDK%20Photos/NX3225SA%20SERIES.jpg
+  suppliers:
+    digikey:
+      part: '644-1129-1-ND'
+      price: [ 1.5, USD ] # price break 1
+'1N4148W-TP':
+  title: High-Speed switching diode 100V 10mA SOD123
+  vendor: Micro Commercial Co
+  category: D # Diode
+  mounting: SMD
+  voltage:
+    forward: 1.25 # @ 150mA
+  current: 0.150 # A; avg rectified
+  capacitance: 2pF # @ 0V, 1MHz
+  image: http://media.digikey.com/photos/Micro%20Commercial%20Photos/353-SOD-123.jpg
+  datasheet: http://61.222.192.61/mccsemi/up_pdf/1N4148W(SOD123).pdf
+  suppliers:
+    digikey:
+      part: '1N4148WTPMSCT-ND'
+      price: [ 0.42, USD ] # price break 1
+'CRCW12101R00JNEA':
+  title: Standard Thick Fild Chip Resistor
+  category: R
+  mounting: SMD
+  resistance: 1 # Ohm
+  power: 0.5 # W
+  image: http://media.digikey.com/renders/Vishay%20Dale%20Renders/Vishay-CRCW-1210.jpg
+  datasheet: http://www.vishay.com/docs/20035/dcrcwe3.pdf
+  suppliers:
+    digikey:
+      part: '541-1.0VCT-ND'
+      price: [ 0.261, USD ] # price break 10
+'500R15W332KV4T':
+  title: Ceramic Capacitor
+  vendor: Johanson Dielectrics Inc
+  category: C
+  mounting: SMD
+  capacitance: 3300pF
+  voltage:
+    rated: 50
+  temperature: [ -55, 125 ]
+  datasheet: http://www.johansondielectrics.com/images/stories/surface-mount/smt-mlc/JDI_Surface-Mount_2008-11.pdf
+  image: http://media.digikey.com/photos/Johanson%20Dielect%20Photos/500R15W332KV4T.JPG
+  suppliers:
+    digikey:
+      part: '709-1192-1-ND'
+      price: [ 0.047, USD ] # price break 10
+'CC0805KRX7R9BB331':
+  title: Ceramic Capacitor
+  vendor: Yageo
+  category: C
+  mounting: SMD
+  capacitance: 3300pF
+  voltage:
+    rated: 50
+  temperature: [ -55, 125 ]
+  image: http://media.digikey.com/photos/Yageo%20Photos/311-0805%20MLCC.jpg
+  datasheet: http://media.digikey.com/pdf/Data%20Sheets/Yageo%20PDFs/MLCC%20ordering%20code.pdf
+  suppliers:
+    digikey:
+      part: '311-1131-1-ND'
+      price: [ 0.067, USD ] # price break 10
+'AD8497ARMZ':
+  title: Precision Thermocouple Amplifiers with Cold Junction Compensation
+  vendor: Analog Devices
+  category: IC
+  mounting: SMD
+  current:
+    supply: 0.000250 # 250µA
+  datasheet: http://www.analog.com/static/imported-files/data_sheets/AD8494_8495_8496_8497.pdf
+  image: http://media.digikey.com/Renders/~~Pkg.Case%20or%20Series/8-TSSOP_8-MSOP.jpg
+  suppliers:
+    digikey:
+      part: 'AD8497ARMZ-ND'
+      price: [ 5.35, USD ] # price break 1
+'690-004-660-023':
+  title: "USB Type B female PCB connector (vertical)"
+  category: CONN
+  mounting: THD
+  description: |
+    Other USB receptacles allowed; this is one alternative
+  suppliers:
+    digikey:
+      part: '151-1083-ND'
+      price: [ 1.28, USD ] # price break 1
+'UE27AC54100':
+  title: "USB Type A female PCB connector; use type B female instead"
+  category: CONN
+  mounting: THD
+  obsolete: true
+  replacement: '690-004-660-023'
+  suppliers:
+    digikey:
+      part: 'UE27AC54100-ND'
+      price: [ 0.85, USD ] # price break 1
+'WHCR10FET':
+  title: Miniature Molded Wirewound
+  category: R
+  mounting: THD
+  resistance: 0.1 # Ohm
+  power: 2 # W
+  datasheet: http://www.ohmite.com/catalog/pdf/whm-wnm.pdf
+  image: http://media.digikey.com/photos/Ohmite%20Photos/WHCR10FET.jpg
+  suppliers:
+    digikey:
+      part: 'WHCR10FECT-ND'
+      price: [ 0.93, USD ] # price break
+'1N4007-T':
+  title: 1.0A Rectifier
+  vendor: Diodes Inc
+  category: D
+  mounting: THD
+  voltage:
+    forward: 1 # max @ 1A
+    reverse: 1000 # max
+  current:
+    average: 1 # rectified
+    reverse: 0.000005 # 5µA @ 1000V
+  temperature: [ -65, 150 ]
+  datasheet: http://www.diodes.com/datasheets/ds28002.pdf
+  image: http://media.digikey.com/photos/Diodes%20Photos/31-DO-41.jpg
+  suppliers:
+    digikey:
+      part: '1N4007DICT-ND'
+      price: [ 0.3, USD ] # price break 1
+'1N4448W-7-F':
+  title: Fast switching surface mount diode
+  vendor: Diodes Inc
+  category: D # Diode
+  mounting: SMD
+  voltage:
+    forward: 1.25 # @ 150mA
+    reverse: 75 # max
+  current:
+    average: 0.250 # A; avg rectified
+    reverse: 0.0000025 # 2.5µA @ 75V
+  capacitance: 4pF # @ 0V, 1MHz
+  image: http://media.digikey.com/photos/Diodes%20Photos/1N4148W-13-F.jpg
+  datasheet: http://www.diodes.com/datasheets/ds12002.pdf
+  suppliers:
+    digikey:
+      part: '1N4448W-FDICT-ND'
+      price: [ 0.38, USD ] # price break 1
+'EKZE6R3ELL222MJ25S':
+  title: Miniature aluminium electrolytic capacitor
+  vendor: United Chemi-Con
+  category: C
+  mounting: THD
+  capacitance: 2200µF
+  voltage:
+    rated: 6.3
+  temperature: [ -40, 105 ]
+  datasheet: http://www.chemi-con.co.jp/e/catalog/pdf/al-e/al-sepa-e/004-lead/al-kze-e-100701.pdf
+  image: "http://media.digikey.com/photos/United%20Chemi-Con%20Photos/KZE%20SERIES%2025H,10D.jpg"
+  suppliers:
+    digikey:
+      part: '565-1634-ND'
+      price: [ 0.62, USD ] # price break 1
+'2N6045G':
+  title: TO-220-3 NPN Darlington transistor
+  category: T # Transistor
+  mounting: THD
+  power: 75 # W
+  datasheet: http://www.onsemi.com/pub_link/Collateral/2N6040-D.PDF
+  image: http://media.digikey.com/photos/On%20Semi%20Photos/488-TO-220AB.jpg
+  suppliers:
+    digikey:
+      part: '2N6045GOS-ND'
+      price: [ 0.99, USD ] # price break 1
+'1N5364BRLG':
+  title: Zener diode 33V 5W axial
+  vendor: ON Semiconductor
+  category: ZD # Zener Diodes
+  mounting: THD
+  impedance: 10 # Ohm; max
+  temperature: [ -65, 200 ]
+  voltage: 
+    forward: 33 # max
+  datasheet: http://www.onsemi.com/pub_link/Collateral/1N5333B-D.PDF
+  image: http://media.digikey.com/Renders/On%20Semi%20Renders/Surmetic_1N5333B.jpg
+  suppliers:
+    digikey:
+      part: '1N5364BGOS-ND'
+      price: [ 0.44, USD ] # price break 1
+'CD74HCT86M96':
+  title: 74HC series logic gate
+  vender: Texas Instruments
+  category: IC
+  mounting: SMD
+  voltage: [ 4.5, 5.5 ]
+  current: 0.0052 # 5.2mA
+  temperature: [ -55, 125 ]
+  datasheet: http://focus.ti.com/lit/ds/symlink/cd74hc86.pdf
+  suppliers:
+    digikey:
+      part: '296-8201-1-ND'
+      price: [ 0.7, USD ] # price break 1
+'74HC86DR2G':
+  title: 74HC series logic gate **OBSOLETE**
+  obsolete: true
+  replacement: 'CD74HCT86M96'
+'LM1949N/NOPB':
+  title: IC Injector drive controller
+  category: IC
+  mounting: THD
+  datasheet: http://www.national.com/ds/LM/LM1949.pdf
+  image: http://media.digikey.com/Renders/~~Pkg.Case%20or%20Series/8-Dip/8-DIP.jpg
+  suppliers:
+    digikey:
+      part: 'LM1949N-ND'
+      price: [ 4.87, USD ] # price break 1
+'LM2940T-5.0/NOPB':
+  title: 1A Low Dropout Regulator
+  category: REG
+  mounting: THD
+  voltage:
+    output: 5
+    input: [ 6.5, 26 ]
+  temperature: [ -40, 125 ]
+  datasheet: http://www.national.com/ds/LM/LM2940.pdf
+  image: http://media.digikey.com/photos/National%20Semi%20Photos/14-TO-220-3.jpg
+  suppliers:
+    digikey:
+      part: 'LM2940T-5.0-ND'
+      price: [ 1.89, USD ] # price break 1
+'FT232RL-REEL':
+  title: USB to serial UART interface
+  category: IC
+  mounting: SMD
+  datasheet: http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_FT232R.pdf
+  image: http://media.digikey.com/Renders/~~Pkg.Case%20or%20Series/28-SOIC.jpg
+  suppliers:
+    digikey:
+      part: '768-1007-1-ND'
+      price: [ 4.5, USD ] # price break 1
+'MAX9924UAUB+':
+  title: Variable Reluctance Sensor Interfaces with Differential Input and Adaptive Peak Threshold
+  vendor: Maxim
+  category: IC
+  mounting: SMD
+  datasheet: http://datasheets.maxim-ic.com/en/ds/MAX9924-MAX9927.pdf
+  image: http://media.digikey.com/Renders/Maxim%20Renders/8-SOIC.jpg
+  suppliers:
+    digikey:
+      part: 'MAX9924UAUB+-ND'
+      price: [ 2.6, USD ] # price break 1
+'LM2937IMP-5.0/NOPB':
+  title: 500 mA Low Dropout Regulator
+  category: REG
+  mounting: SMD
+  voltage:
+    output: 5
+    input: [ 5, 26 ]
+  temperature: [ -40, 125 ]
+  datasheet: http://www.national.com/ds/LM/LM2937.pdf
+  suppliers:
+    digikey:
+      part: 'LM2937IMP-5.0CT-ND'
+      price: [ 2.06, USD ] # price break 1
+'MPX4100A':
+  title: "AAP?: Air Pressure Sensor; female 3.5mm; 2.9 - 15.2 PSI"
+  vendor: Freescale Semiconductor
+  category: pressure sensors
+  mounting: THD
+  datasheet: http://www.freescale.com/files/sensors/doc/data_sheet/MPX4100A.pdf
+  image: http://media.digikey.com/photos/Freescale%20Photos/375-867-08.jpg
+  suppliers:
+    digikey:
+      part: 'MPX4100A-ND'
+      price: [ 14, USD ] # price break 1
+'MPX4100AP':
+  title: "MAP?: Air Pressure Sensor; male 5mm tube; 2.9 - 15.2 PSI"
+  category: pressure sensors
+  mounting: THD
+  datasheet: http://www.freescale.com/files/sensors/doc/data_sheet/MPX4100A.pdf
+  image: http://media.digikey.com/photos/Freescale%20Photos/375-867B-04.jpg
+  suppliers:
+    digikey:
+      part: 'MPX4100AP-ND'
+      price: [ 15.84, USD ] # price break 1
+'MPX4250AP':
+  title: "MAP?: Air Pressure Sensor; male 5mm tube; 2.9 - 36.3 PSI"
+  category: pressure sensors
+  mounting: THD
+  datasheet: http://www.freescale.com/files/sensors/doc/data_sheet/MPX4250A.pdf
+  image: http://media.digikey.com/photos/Freescale%20Photos/375-867B-04.jpg
+  suppliers:
+    digikey:
+      part: 'MPX4250AP-ND'
+      price: [ 14, USD ] # price break 1
+'PHP29N08T,127':
+  title: MOSFET 75V 27A
+  vendor: NXP Semiconductors
+  category: MOSFET
+  voltage: 75 # drain to source
+  current: 27 # @ 25°C
+  power: 88 # W max
+  datasheet: http://www.nxp.com/documents/data_sheet/PHP29N08T.pdf
+  image: "http://media.digikey.com/photos/NXP%20Semi%20Photos/568-TO-220AB-3,SOT78.jpg"
+  suppliers:
+    digikey:
+      part: '568-5762-ND'
+      price: [ 1.42, USD ] # price break 1
+'VNP20N07':
+  title: MOSFET 70V **ONLY AVAILABLE IN QTY of 1000 or more!**
+  obsolete: true
+  replacement: 'PHP29N08T,127'
+'MBR0520L':
+  title: Schottky diode
+  category: SD # Schottky diode
+  mounting: SMD
+  voltage:
+    average: 0.385 # max @ 500mA
+    reverse: 20 # max
+  current:
+    average: 0.5
+    leakage: 0.000250 # @ 20V
+  datasheet: http://www.onsemi.com/pub_link/Collateral/MBR0520LT1-D.PDF
+  image: http://media.digikey.com/Renders/On%20Semi%20Renders/SOD-123_425.jpg
+  suppliers:
+    digikey:
+      part: 'MBR0520LT1GOSCT-ND'
+      price: [ 0.44, USD ] # price break
+'MC9S12XDP512MAL':
+  title: MC9S12XDP512 MCU
+  category: IC
+  mounting: SMD
+  datasheet: http://www.freescale.com/files/microcontrollers/doc/data_sheet/MC9S12XDP512RMV2.pdf
+  image: http://media.digikey.com/photos/Freescale%20Photos/MC9S12XDP512MAL.JPG
+  suppliers:
+    digikey:
+      part: 'MC9S12XDP512MAL-ND'
+      price: [ 23.52, USD ] # price break 1
+'AU-Y1002-A-R':
+  title: USB A-B Male cable
+  category: cables
+  description: |
+    This is a regular USB A to B cable, you might already have one
+    for your printer or a miscellaneous similar device. Choose
+    something that works with your USB receptacle.
+  suppliers:
+    digikey:
+      part: 'AE9931-ND'
+      price: [ 5.75, USD ] # price break 1
+'AK670/2-1-R':
+  title: USB A-A Male cable
+  obsolete: true
+  replacement: AU-Y1002-A-R
+  category: cables
+  suppliers:
+    digikey:
+      part: 'AE1454-ND'
+      price: [ 4.6, USD ] # price break 1
