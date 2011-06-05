@@ -8,17 +8,36 @@ require 'yaml'
 base_path = File.split( File.split( File.expand_path( __FILE__ ) ).first ).first
 $LOAD_PATH << File.join( base_path, 'lib' )
 
+require 'freebombs/logger'
 require 'freebombs/db_handler'
 
 class CheckDBSanity < FreeBOMBS::DBHandler
 
+  def log( message )
+    puts message
+  end
+
+  def error( message )
+    puts
+    puts "Error: "+message
+    puts
+    exit
+  end
+
+  def valid_url?( url )
+    ( url.start_with?('http://') or url.start_with?('https://') ) and url.length > 10
+  end
+
   def check_suppliers
-    mandatory_keys = [ 'title', 'homepage' ]
+    mandatory_keys = [ 'title', 'homepage', 'currency' ]
     suppliers.each_key do |name|
       puts "Checking supplier: #{name}"
       supplier = suppliers[name]
       mandatory_keys.each do |key|
         error "Missing #{key} for supplier #{name}" unless supplier.has_key? key
+      end
+      unless [ 'USD', 'EUR' ].include? supplier['currency']
+        error "Invalid currency: #{supplier['currency'].inspect}"
       end
     end
   end
@@ -27,19 +46,9 @@ class CheckDBSanity < FreeBOMBS::DBHandler
     unless supply_spec['part'].class == String
       error "Invalid part specification: #{supply_spec['part'].inspect}"
     end
-    unless supply_spec['price'].class == Array
-      error "Invalid price specification: #{supply_spec['price'].inspect}"
-    end
-    unless supply_spec['price'].length == 2
-      error "Invalid price specification length: #{supply_spec['price'].inspect}"
-    end
-    price_num = supply_spec['price'][0]
+    price_num = supply_spec['price']
     unless [ Float, Fixnum ].include? price_num.class
       error "Invalid price: #{price_num.inspect}"
-    end
-    price_currency = supply_spec['price'][1]
-    unless [ 'USD', 'EUR' ].include? price_currency
-      error "Invalid currency: #{price_currency.inspect}"
     end
   end
 
@@ -92,6 +101,12 @@ class CheckDBSanity < FreeBOMBS::DBHandler
           end
         elsif not component.has_key? 'description'
           error "Datasheet URL (datasheet) is missing for component: #{mfg_id}"
+        end
+        if component.has_key? 'replacement'
+          replacement = component['replacement']
+          unless components.has_key? replacement
+            error "Missing replacement component id: #{replacement.inspect}"
+          end
         end
       end
     end

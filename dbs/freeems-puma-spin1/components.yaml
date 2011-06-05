@@ -14,7 +14,7 @@
   suppliers:
     digikey:
       part: '620-1158-2-ND'
-      price: [ 4.48, USD ]
+      price: 4.48
 'MCR10EZPF1001':
   title: Compact Thick Film Chip Resistor
   category: R
@@ -27,7 +27,7 @@
   suppliers:
     digikey:
       part: 'RHM1.00KCRDKR-ND'
-      price: [ 0.042, USD ]
+      price: 0.042
 'RSF200JB-1R0':
   title: Metal Oxide Film Resistor (Flame-Proof)
   vendor: Yaego
@@ -40,7 +40,7 @@
   suppliers:
     digikey:
       part: '1.0W-2-ND'
-      price: [ 0.21, USD ]
+      price: 0.21
 '52000001009':
   title: Fuse Clip (not included)
   obsolete: true
@@ -56,7 +56,7 @@
   suppliers:
     digikey:
       part: 'RMCF0805FT10K0CT-ND'
-      price: [ 0.04, USD ] # price break 1
+      price: 0.04 # price break 1
 'RMCF0805JT10M0':
   title: General Purpose Thick Film Chip Resistor
   vendor: Stackpole Electronics Inc (VA)
@@ -69,7 +69,7 @@
   suppliers:
     digikey:
       part: 'RMCF0805JT10M0-ND'
-      price: [ 0.0019, USD ] # price break 5000
+      price: 0.0019 # price break 5000
 'RMCF0805JT22K0':
   title: General Purpose Thick Film Chip Resistor
   vendor: Stackpole Electronics Inc (VA)
@@ -82,7 +82,7 @@
   suppliers:
     digikey:
       part: 'RMCF0805JT22K0-ND'
-      price: [ 0.0019, USD ] # price break 5000
+      price: 0.0019 # price break 5000
 'MCR10EZPF3902':
   title: SMD resistor 39k
   category: R
@@ -93,7 +93,7 @@
   suppliers:
     digikey:
       part: 'RHM39.0KCRDKR-ND'
-      price: [ 0.042, USD ] # price break 10
+      price: 0.042 # price break 10
 'BZT52C5V1-7-F':
   title: Zener diode 5.1V 500mW
   category: ZD # Zener Diodes
@@ -106,7 +106,7 @@
   suppliers:
     digikey:
       part: 'BZT52C5V1-FDICT-ND'
-      price: [ 0.38, USD ] # price break 1
+      price: 0.38 # price break 1
 'RMCF0805JT68K0':
   title: General Purpose Thick Film Chip Resistor
   vendor: Stackpole Electronics Inc (VA)
@@ -119,7 +119,7 @@
   suppliers:
     digikey:
       part: 'RMCF0805JT68K0-ND'
-      price: [ 0.0019, USD ] # price break 5000
+      price: 0.0019 # price break 5000
 'GRM21BR71H104KA01L':
   title: Chip Monolithic Ceramic Capacitor
   category: C # caps
@@ -132,7 +132,7 @@
   suppliers:
     digikey:
       part: '490-1666-1-ND'
-      price: [ 0.15, USD ] # price break 1
+      price: 0.15 # price break 1
 'RMCF0805JT1K60':
   title: General Purpose Thick Film Chip Resistor
   vendor: Stackpole Electronics Inc (VA)
@@ -145,7 +145,7 @@
   suppliers:
     digikey:
       part: 'RMCF0805JT1K60TR-ND'
-      price: [ 0.019, USD ] # price break 5000
+      price: 0.019 # price break 5000
 'RMCF0805JT100K':
   title: General Purpose Thick Film Chip Resistor
   vendor: Stackpole Electronics Inc (VA)
@@ -158,7 +158,7 @@
   suppliers:
     digikey:
       part: 'RMCF0805JT100KCT-ND'
-      price: [ 0.03, USD ] # price break 1
+      price: 0.03 # price break 1
 'CC0805JRNP09BN100':
   title: Ceramic Capacitor
   vendor: Yageo
@@ -171,7 +171,7 @@
   suppliers:
     digikey:
       part: '311-1099-1-ND'
-      price: [ 0.069, USD ] # price break 10
+      price: 0.069 # price break 10
 'UVZ1C100MDD':
   title: Aluminium Electrolytic Capacitor
   vendor: Nichicon
@@ -184,7 +184,7 @@
   suppliers:
     digikey:
       part: '493-1279-ND'
-      price: [ 0.25, USD ] # price break 1
+      price: 0.25 # price break 1
 'MCR10EZPF2201':
   title: Compact Thick Field Chip Resistor
   vendor: Rohm Semiconductor
@@ -197,7 +197,7 @@
   suppliers:
     digikey:
       part: 'RHM2.20KCRCT-ND'
-      price: [ 0.042, USD ] # price break 10
+      price: 0.042 # price break 10
 '500R15N220JV4T':
   title: Ceramic Capacitor
   vendor: Johanson Dielectrics Inc
@@ -211,7 +211,7 @@
   suppliers:
     digikey:
       part: '709-1172-1-ND'
-      price: [ 0.044, USD ] # price break 10
+      price: 0.044 # price break 10
 'TAJC226M016RNJ':
   title: Tantalum Capacitor
   vendor: AVX Corporation
@@ -226,7 +226,7 @@
   suppliers:
     digikey:
       part: '478-3901-1-ND'
-      price: [ 0.41, USD ] # price break
+      price: 0.41 # price break
 'RMCF0805JT270R':
   title: General Purpose Thick Film Chip Resistor
   vendor: Stackpole Electronics Inc (VA)
@@ -239,7 +239,7 @@
   suppliers:
     digikey:
       part: 'RMCF0805JT270RCT-ND'
-      price: [ 0.03, USD ] # price break 1
+      price: 0.03 # price break 1
 'MCR10EZPF3301':
   title: Compact Thick Field Chip Resistor
   vendor: Rohm Semiconductor
@@ -252,7 +252,7 @@
   suppliers:
     digikey:
       part: 'RHM3.30KCRCT-ND'
-      price: [ 0.042, USD ] # price break 10
+      price: 0.042 # price break 10
 'MCR10EZPF3901':
   title: Compact Thick Field Chip Resistor
   vendor: Rohm Semiconductor
@@ -265,7 +265,7 @@
   suppliers:
     digikey:
       part: 'RHM3.90KCRCT-ND'
-      price: [ 0.042, USD ] # price break 10
+      price: 0.042 # price break 10
 '08055C333KAZ2A':
   title: Ceramic Capacitor
   vendor: AVX Corporation
@@ -279,7 +279,7 @@
   suppliers:
     digikey:
       part: '478-3550-1-ND'
-      price: [ 0.49, USD ] # price break 10
+      price: 0.49 # price break 10
 'RMCF0805JT4K70':
   title: General Purpose Thick Film Chip Resistor
   vendor: Stackpole Electronics Inc (VA)
@@ -292,7 +292,7 @@
   suppliers:
     digikey:
       part: 'RMCF0805JT4K70CT-ND'
-      price: [ 0.03, USD ] # price break 1
+      price: 0.03 # price break 1
 'ERJ-6GEYJ684V':
   title: Thick Film Chip Resistor
   vendor: Panasonic
@@ -305,7 +305,7 @@
   suppliers:
     digikey:
       part: 'P680KACT-ND'
-      price: [ 0.04, USD ] # price break 1
+      price: 0.04 # price break 1
 'GRM216R71H103KA01D':
   title: Chip Monolithic Ceramic Cap
   vendor: Murata
@@ -319,7 +319,7 @@
   suppliers:
     digikey:
       part: '490-1664-1-ND'
-      price: [ 0.1, USD ] # price break 1
+      price: 0.1 # price break 1
 'LH R974-LP-1-0-20-R18':
   title: RH Chip LED (RED)
   vendor: OSRAM
@@ -331,7 +331,7 @@
   suppliers:
     digikey:
       part: '475-1415-1-ND'
-      price: [ 0.11, USD ] # price break 1
+      price: 0.11 # price break 1
 'CC0805KRX7R9BB152':
   title: Ceramic Capacitor
   vendor: Yageo
@@ -345,7 +345,7 @@
   suppliers:
     digikey:
       part: '311-1128-1-ND'
-      price: [ 0.067, USD ] # price break 10
+      price: 0.067 # price break 10
 'NX3225SA 16MHZ AT-W':
   title: 16MHz Crystal
   vendor: NDK
@@ -360,7 +360,7 @@
   suppliers:
     digikey:
       part: '644-1129-1-ND'
-      price: [ 1.5, USD ] # price break 1
+      price: 1.5 # price break 1
 '1N4148W-TP':
   title: High-Speed switching diode 100V 10mA SOD123
   vendor: Micro Commercial Co
@@ -375,7 +375,7 @@
   suppliers:
     digikey:
       part: '1N4148WTPMSCT-ND'
-      price: [ 0.42, USD ] # price break 1
+      price: 0.42 # price break 1
 'CRCW12101R00JNEA':
   title: Standard Thick Fild Chip Resistor
   category: R
@@ -387,7 +387,7 @@
   suppliers:
     digikey:
       part: '541-1.0VCT-ND'
-      price: [ 0.261, USD ] # price break 10
+      price: 0.261 # price break 10
 '500R15W332KV4T':
   title: Ceramic Capacitor
   vendor: Johanson Dielectrics Inc
@@ -402,7 +402,7 @@
   suppliers:
     digikey:
       part: '709-1192-1-ND'
-      price: [ 0.047, USD ] # price break 10
+      price: 0.047 # price break 10
 'CC0805KRX7R9BB331':
   title: Ceramic Capacitor
   vendor: Yageo
@@ -417,7 +417,7 @@
   suppliers:
     digikey:
       part: '311-1131-1-ND'
-      price: [ 0.067, USD ] # price break 10
+      price: 0.067 # price break 10
 'AD8497ARMZ':
   title: Precision Thermocouple Amplifiers with Cold Junction Compensation
   vendor: Analog Devices
@@ -430,7 +430,7 @@
   suppliers:
     digikey:
       part: 'AD8497ARMZ-ND'
-      price: [ 5.35, USD ] # price break 1
+      price: 5.35 # price break 1
 '690-004-660-023':
   title: "USB Type B female PCB connector (vertical)"
   category: CONN
@@ -440,7 +440,7 @@
   suppliers:
     digikey:
       part: '151-1083-ND'
-      price: [ 1.28, USD ] # price break 1
+      price: 1.28 # price break 1
 'UE27AC54100':
   title: "USB Type A female PCB connector"
   category: CONN
@@ -452,7 +452,7 @@
   suppliers:
     digikey:
       part: 'UE27AC54100-ND'
-      price: [ 0.85, USD ] # price break 1
+      price: 0.85 # price break 1
 'WHCR10FET':
   title: Miniature Molded Wirewound
   category: R
@@ -464,7 +464,7 @@
   suppliers:
     digikey:
       part: 'WHCR10FECT-ND'
-      price: [ 0.93, USD ] # price break
+      price: 0.93 # price break
 '1N4007-T':
   title: 1.0A Rectifier
   vendor: Diodes Inc
@@ -482,7 +482,7 @@
   suppliers:
     digikey:
       part: '1N4007DICT-ND'
-      price: [ 0.3, USD ] # price break 1
+      price: 0.3 # price break 1
 '1N4448W-7-F':
   title: Fast switching surface mount diode
   vendor: Diodes Inc
@@ -500,7 +500,7 @@
   suppliers:
     digikey:
       part: '1N4448W-FDICT-ND'
-      price: [ 0.38, USD ] # price break 1
+      price: 0.38 # price break 1
 'EKZE6R3ELL222MJ25S':
   title: Miniature aluminium electrolytic capacitor
   vendor: United Chemi-Con
@@ -515,7 +515,7 @@
   suppliers:
     digikey:
       part: '565-1634-ND'
-      price: [ 0.62, USD ] # price break 1
+      price: 0.62 # price break 1
 '2N6045G':
   title: TO-220-3 NPN Darlington transistor
   category: T # Transistor
@@ -526,7 +526,7 @@
   suppliers:
     digikey:
       part: '2N6045GOS-ND'
-      price: [ 0.99, USD ] # price break 1
+      price: 0.99 # price break 1
 '1N5364BRLG':
   title: Zener diode 33V 5W axial
   vendor: ON Semiconductor
@@ -541,7 +541,7 @@
   suppliers:
     digikey:
       part: '1N5364BGOS-ND'
-      price: [ 0.44, USD ] # price break 1
+      price: 0.44 # price break 1
 'CD74HCT86M96':
   title: 74HC series logic gate
   vendor: Texas Instruments
@@ -554,7 +554,7 @@
   suppliers:
     digikey:
       part: '296-8201-1-ND'
-      price: [ 0.7, USD ] # price break 1
+      price: 0.7 # price break 1
 '74HC86DR2G':
   title: 74HC series logic gate **OBSOLETE**
   obsolete: true
@@ -568,7 +568,7 @@
   suppliers:
     digikey:
       part: 'LM1949N-ND'
-      price: [ 4.87, USD ] # price break 1
+      price: 4.87 # price break 1
 'LM2940T-5.0/NOPB':
   title: 1A Low Dropout Regulator
   category: REG
@@ -582,7 +582,7 @@
   suppliers:
     digikey:
       part: 'LM2940T-5.0-ND'
-      price: [ 1.89, USD ] # price break 1
+      price: 1.89 # price break 1
 'FT232RL-REEL':
   title: USB to serial UART interface
   category: IC
@@ -592,7 +592,7 @@
   suppliers:
     digikey:
       part: '768-1007-1-ND'
-      price: [ 4.5, USD ] # price break 1
+      price: 4.5 # price break 1
 'MAX9924UAUB+':
   title: Variable Reluctance Sensor Interfaces with Differential Input and Adaptive Peak Threshold
   vendor: Maxim
@@ -603,7 +603,7 @@
   suppliers:
     digikey:
       part: 'MAX9924UAUB+-ND'
-      price: [ 2.6, USD ] # price break 1
+      price: 2.6 # price break 1
 'LM2937IMP-5.0/NOPB':
   title: 500 mA Low Dropout Regulator
   category: REG
@@ -616,7 +616,7 @@
   suppliers:
     digikey:
       part: 'LM2937IMP-5.0CT-ND'
-      price: [ 2.06, USD ] # price break 1
+      price: 2.06 # price break 1
 'MPX4100A':
   title: "AAP?: Air Pressure Sensor; female 3.5mm; 2.9 - 15.2 PSI"
   vendor: Freescale Semiconductor
@@ -627,7 +627,7 @@
   suppliers:
     digikey:
       part: 'MPX4100A-ND'
-      price: [ 14, USD ] # price break 1
+      price: 14 # price break 1
 'MPX4100AP':
   title: "MAP?: Air Pressure Sensor; male 5mm tube; 2.9 - 15.2 PSI"
   category: pressure sensors
@@ -637,7 +637,7 @@
   suppliers:
     digikey:
       part: 'MPX4100AP-ND'
-      price: [ 15.84, USD ] # price break 1
+      price: 15.84 # price break 1
 'MPX4250AP':
   title: "MAP?: Air Pressure Sensor; male 5mm tube; 2.9 - 36.3 PSI"
   category: pressure sensors
@@ -647,7 +647,7 @@
   suppliers:
     digikey:
       part: 'MPX4250AP-ND'
-      price: [ 14, USD ] # price break 1
+      price: 14 # price break 1
 'PHP29N08T,127':
   title: MOSFET 75V 27A
   vendor: NXP Semiconductors
@@ -660,7 +660,7 @@
   suppliers:
     digikey:
       part: '568-5762-ND'
-      price: [ 1.42, USD ] # price break 1
+      price: 1.42 # price break 1
 'VNP20N07':
   title: MOSFET 70V **ONLY AVAILABLE IN QTY of 1000 or more!**
   obsolete: true
@@ -680,7 +680,7 @@
   suppliers:
     digikey:
       part: 'MBR0520LT1GOSCT-ND'
-      price: [ 0.44, USD ] # price break
+      price: 0.44 # price break
 'MC9S12XDP512MAL':
   title: MC9S12XDP512 MCU
   category: IC
@@ -690,7 +690,7 @@
   suppliers:
     digikey:
       part: 'MC9S12XDP512MAL-ND'
-      price: [ 23.52, USD ] # price break 1
+      price: 23.52 # price break 1
 'AU-Y1002-A-R':
   title: USB A-B Male cable
   category: cables
@@ -701,7 +701,7 @@
   suppliers:
     digikey:
       part: 'AE9931-ND'
-      price: [ 5.75, USD ] # price break 1
+      price: 5.75 # price break 1
 'AK670/2-1-R':
   title: USB A-A Male cable
   #obsolete: true
@@ -712,4 +712,4 @@
   suppliers:
     digikey:
       part: 'AE1454-ND'
-      price: [ 4.6, USD ] # price break 1
+      price: 4.6 # price break 1

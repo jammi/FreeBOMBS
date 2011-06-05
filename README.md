@@ -32,6 +32,7 @@ Any unique string is allowed. Each value MUST be a Hash containing the following
 
 - **title**: Human (user) -readable string; the full name of the supplier.
 - **homepage**: The home-page URL of the supplier.
+- **currency**: The default currency used by the supplier, only ``USD`` and ``EUR`` supported currently.
 
 
 ## The component specification document: components.yaml
@@ -61,9 +62,7 @@ Any items of a normal component are allowed, but not required.
 - **datasheet**: An URL to the datasheet of the component. Optional, if the description is defined.
 - **suppliers**: A Hash containing supplier ID's as keys and the following items as the value (Hash):
   - **part**: The part number of the supplier as a String.
-  - **price**: A pair of values in an Array:
-    1. The price as a number, eg. ``0.053`` or ``18.84`` or ``37``
-    2. The currency of the price, only ``USD`` and ``EUR`` supported currently.
+  - **price**: The price as a number, eg. ``0.053`` or ``18.84`` or ``37``. Use the default currency of the supplier, it will be normalized.
 
 Currently, any extra key-value pairs are allowed, but not supported. Support will be added,
 when component_types.yaml is defined.
@@ -76,7 +75,7 @@ Examples:
   suppliers:
     digikey:
       part: 'RHM1.00KCRDKR-ND'
-      price: [ 0.042, USD ]
+      price: 0.042
 'AU-Y1002-A-R':
   title: USB A-B Male cable
   category: cables
@@ -87,7 +86,7 @@ Examples:
   suppliers:
     digikey:
       part: 'AE9931-ND'
-      price: [ 5.75, USD ] # price break 1
+      price: 5.75
 'CD74HCT86M96':
   title: 74HC series logic gate
   vender: Texas Instruments
@@ -100,7 +99,7 @@ Examples:
   suppliers:
     digikey:
       part: '296-8201-1-ND'
-      price: [ 0.7, USD ] # price break 1
+      price: 0.7
 '52000001009':
   title: Fuse Clip (not included)
   obsolete: true
@@ -272,6 +271,7 @@ sections:
 - Ruby
 - RubyGems (if Ruby version is below 1.9)
 - ``gem install yaml`` (if Ruby version is below 1.9)
+- ``gem install bluecloth`` (used for the Markdown to html conversion)
  
 
 ### Run the valitation script like this:

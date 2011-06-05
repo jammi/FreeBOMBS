@@ -2,4 +2,10 @@
 
 # Copyright 2011 Juha-Jarmo Heinonen <o@sorsacode.com>
 
-warn "THIS SCRIPT DOES NOTHING YET!"
+base_path = File.split( File.split( File.expand_path( __FILE__ ) ).first ).first
+$LOAD_PATH << File.join( base_path, 'lib' )
+
+require 'freebombs'
+
+FreeBOMBS.cli
+
