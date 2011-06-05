@@ -109,6 +109,41 @@ class CheckDBSanity < FreeBOMBS::DBHandler
     arr
   end
 
+  def check_component_references( component_references )
+    component_references.each do |component_ref|
+      unless [ Array, String ].include? component_ref.class
+        error "Expected the component as an Array or a String, got #{component.class}"
+      end
+      if component_ref.class == String
+        component_ref = [ 1, component_ref ]
+      end
+      unless component_ref.length == 2
+        error "The component should consist of a [ amount, 'component_id' ] pair, got: #{component.inspect}"
+      end
+      component_amount = component_ref[0]
+      unless component_amount.class == Fixnum
+        error "Expected component amount as a Fixnum, got: #{component_amount.class}"
+      end
+      component_id = component_ref[1]
+      unless component_id.class == String
+        error "Expected component id as a String, got: #{component_id.class}"
+      end
+      unless components.has_key? component_id
+        error "Undefined component: #{component_id}"
+      end
+      @components_used.push component_id unless @components_used.include? component_id
+      component = components[component_id]
+      if component['obsolete']
+        if component.has_key? 'replacement'
+          puts "..obsolete component defined: #{component_id}, it has a replacement: #{component['replacement'].inspect}"
+          @components_used.push component['replacement'] unless @components_used.include? component['replacement']
+        else
+          error "Obsolete component without replacement defined: #{component_id}"
+        end
+      end
+    end
+  end
+
   def check_config_section( section_name, sections )
     puts "Checking configurable section #{section_name}"
     section = sections[section_name]
@@ -184,38 +219,7 @@ class CheckDBSanity < FreeBOMBS::DBHandler
       end
     end
     if section.has_key? 'components'
-      section['components'].each do |component_ref|
-        unless [ Array, String ].include? component_ref.class
-          error "Expected the component as an Array or a String, got #{component.class}"
-        end
-        if component_ref.class == String
-          component_ref = [ 1, component_ref ]
-        end
-        unless component_ref.length == 2
-          error "The component should consist of a [ amount, 'component_id' ] pair, got: #{component.inspect}"
-        end
-        component_amount = component_ref[0]
-        unless component_amount.class == Fixnum
-          error "Expected component amount as a Fixnum, got: #{component_amount.class}"
-        end
-        component_id = component_ref[1]
-        unless component_id.class == String
-          error "Expected component id as a String, got: #{component_id.class}"
-        end
-        unless components.has_key? component_id
-          error "Undefined component: #{component_id}"
-        end
-        @components_used.push component_id unless @components_used.include? component_id
-        component = components[component_id]
-        if component['obsolete']
-          if component.has_key? 'replacement'
-            puts "..obsolete component defined: #{component_id}, it has a replacement: #{component['replacement'].inspect}"
-            @components_used.push component['replacement'] unless @components_used.include? component['replacement']
-          else
-            error "Obsolete component without replacement defined: #{component_id}"
-          end
-        end
-      end
+      check_component_references( section['components'] )
     end
   end
 
@@ -242,6 +246,7 @@ class CheckDBSanity < FreeBOMBS::DBHandler
       error "The sections have these unordered sections: #{extra_sections.join(', ')}"
     end
     @components_used = []
+    check_component_references( configurations['components'] )
     section_order.each do |section_name|
       check_config_section( section_name, sections )
     end

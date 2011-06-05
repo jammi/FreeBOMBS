@@ -7,7 +7,7 @@ description: |
 components:
   - 'MCR10EZPF1001'
   - 'RSF200JB-1R0'
-  - '52000001009'
+  #- '52000001009' # unused
   - [ 11, 'RMCF0805FT10K0' ]
   - [ 2, 'RMCF0805JT10M0' ]
   - 'RMCF0805JT22K0'
