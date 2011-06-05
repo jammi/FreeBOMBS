@@ -5,7 +5,8 @@
 # Databases
 
 FreeBOMBS uses a database consisting of the following YAML files in a folder.
-There is an example database included in the dbs directory; ``freeems-puma-spin1``
+There is an example database included in the dbs directory "dbs/freeems-puma-spin1"
+
 - Mandatory keys are in **bold**
 - Markdown is allowed (but not supported yet) in at least ``title`` and ``description`` fields.
 
@@ -15,7 +16,7 @@ There is an example database included in the dbs directory; ``freeems-puma-spin1
 This is a definition list of component types (not implemented yet)
 
 
-## ``suppliers.yaml``
+## suppliers.yaml
 
 A list of known/supported component suppliers. Each key on the top level is the supplier ID.
 Any unique string is allowed. Each value MUST be a Hash containing the following items:
@@ -23,7 +24,7 @@ Any unique string is allowed. Each value MUST be a Hash containing the following
 - **homepage**: The home-page URL of the supplier.
 
 
-## ``components.yaml``
+## components.yaml
 
 A database of all components used in the project.
 Each key on the top level is the manufacturer ID code of the component. These MUST be unique.
@@ -55,7 +56,7 @@ Currently, any extra key-value pairs are allowed, but not supported. Support wil
 when component_types.yaml is defined.
 
 
-## ``configurations.yaml``
+## configurations.yaml
 
 A structure defining, which components are used in which configuration.
 
@@ -99,17 +100,30 @@ Example: ``'RMCF0805JT1K60'``
   - Obsolete compnonet references without a replacement are treated as errors.
 
 
-# Validating the database:
+## Validating the database:
 
+### You'll need the following dependencies installed:
 
-You'll need the following dependencies installed:
-
- - Ruby
- - RubyGems (if Ruby version is below 1.9)
- - ``gem install yaml`` (if Ruby version is below 1.9)
+- Ruby
+- RubyGems (if Ruby version is below 1.9)
+- ``gem install yaml`` (if Ruby version is below 1.9)
  
 
-Run the valitation script like this:
+### Run the valitation script like this:
 
 ``ruby test/check_db_sanity.rb``
+
+The script outputs a verbose state of what it's checking, warnings are indented with two dots and errors halt execution after displaying the error message.
+
+
+# References:
+- [YAML](http://www.yaml.org/)
+- [Ruby](http://www.ruby-lang.org/)
+- [RubyGems](http://www.rubygems.org/)
+- [Official FreeBOMBS repository](https://github.com/jammi/FreeBOMBS)
+
+
+# Credits
+- FreeBOMBS: Juha-Jarmo Heinonen
+- The various [FreeEMS](http://www.freeems.org/) contributors for all the input as well as a baseline configuration.
 
