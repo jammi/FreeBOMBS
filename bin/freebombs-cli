@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+# Copyright 2011 Juha-Jarmo Heinonen <o@sorsacode.com>
+
+warn "THIS SCRIPT DOES NOTHING YET!"
