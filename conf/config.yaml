@@ -1,0 +1,6 @@
+
+freebombs:
+  db_path: ./dbs/freeems-puma-spin1
+  locale_strings: ./rsrc/strings.yaml
+  currency: EUR
+
