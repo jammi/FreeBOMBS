@@ -544,7 +544,7 @@
       price: [ 0.44, USD ] # price break 1
 'CD74HCT86M96':
   title: 74HC series logic gate
-  vender: Texas Instruments
+  vendor: Texas Instruments
   category: IC
   mounting: SMD
   voltage: [ 4.5, 5.5 ]

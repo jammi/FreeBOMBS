@@ -1,5 +1,13 @@
 
-*FreeBOMS is a Free Bill of Materials Build System*
+*FreeBOMBS is a Free Bill of Materials Build System*
+
+
+# Introduction
+
+The goal of FreeBOMBS is to provide a precise system for configuring product BOM's as well as
+an online user interface for end users to configure their product and get a full BOM as the result.
+
+Further development will include an editor for the YAML databases (and support other structure formats).
 
 
 # Databases
@@ -11,20 +19,22 @@ There is an example database included in the dbs directory "dbs/freeems-puma-spi
 - Markdown is allowed (but not supported yet) in at least ``title`` and ``description`` fields.
 
 
-## component_types.yaml
+## The component type specification document: component_types.yaml
 
-This is a definition list of component types (not implemented yet)
+This is a definition list of component types (not implemented yet).
+It will include further, dynamic validation rules for component data and UI layout.
 
 
-## suppliers.yaml
+## The supplier specification document: suppliers.yaml
 
 A list of known/supported component suppliers. Each key on the top level is the supplier ID.
 Any unique string is allowed. Each value MUST be a Hash containing the following items:
+
 - **title**: Human (user) -readable string; the full name of the supplier.
 - **homepage**: The home-page URL of the supplier.
 
 
-## components.yaml
+## The component specification document: components.yaml
 
 A database of all components used in the project.
 Each key on the top level is the manufacturer ID code of the component. These MUST be unique.
@@ -35,11 +45,14 @@ There MUST be a Hash for each key. What's defined below is the contents of each 
 
 ### Structure of an obsolete component
 
+Mark a component as absolete, when it becomes hard to source or is replaced by something better.
+You should define a replacement component instead and make a link to it using the replacement component reference ID.
+
 - **title**: A single-line description of the component
 - **obsolete**: MUST be true
 - replacement: A reference ID to an equivalent part, which MUST be defined in the components database
 
-Any items of a normal component are allowed, but not mandatory.
+Any items of a normal component are allowed, but not required.
 
 
 ### Structure of a normal component
@@ -55,8 +68,50 @@ Any items of a normal component are allowed, but not mandatory.
 Currently, any extra key-value pairs are allowed, but not supported. Support will be added,
 when component_types.yaml is defined.
 
+Examples:
+<pre>
+'MCR10EZPF1001':
+  title: Compact Thick Film Chip Resistor
+  datasheet: http://www.rohm.com/products/databook/r/pdf/mcr10.pdf
+  suppliers:
+    digikey:
+      part: 'RHM1.00KCRDKR-ND'
+      price: [ 0.042, USD ]
+'AU-Y1002-A-R':
+  title: USB A-B Male cable
+  category: cables
+  description: |
+    This is a regular USB A to B cable, you might already have one
+    for your printer or a miscellaneous similar device. Choose
+    something that works with your USB receptacle.
+  suppliers:
+    digikey:
+      part: 'AE9931-ND'
+      price: [ 5.75, USD ] # price break 1
+'CD74HCT86M96':
+  title: 74HC series logic gate
+  vender: Texas Instruments
+  category: IC
+  mounting: SMD
+  voltage: [ 4.5, 5.5 ] # V; range
+  current: 0.0052 # 5.2mA
+  temperature: [ -55, 125 ]
+  datasheet: http://focus.ti.com/lit/ds/symlink/cd74hc86.pdf
+  suppliers:
+    digikey:
+      part: '296-8201-1-ND'
+      price: [ 0.7, USD ] # price break 1
+'52000001009':
+  title: Fuse Clip (not included)
+  obsolete: true
+'74HC86DR2G':
+  title: 74HC series logic gate **OBSOLETE**
+  obsolete: true
+  replacement: 'CD74HCT86M96'
+</pre>
 
-## configurations.yaml
+
+## The product configuration specification document: configurations.yaml
 
 A structure defining, which components are used in which configuration.
 
@@ -99,6 +154,116 @@ Example: ``'RMCF0805JT1K60'``
   - Obsolete component references with a replacement defined show a warning.
   - Obsolete compnonet references without a replacement are treated as errors.
 
+Example:
+<pre>
+
+title: FreeEMS Puma Spin 1
+description: |
+  # Introduction
+  This BOM is highly experimental, proceed at your own risk!
+  The baseline configuration includes only a set of bare minimum parts.
+components:
+  - 'MCR10EZPF1001'
+  - 'RSF200JB-1R0'
+  - '52000001009'
+  - [ 11, 'RMCF0805FT10K0' ]
+  - [ 2, 'RMCF0805JT10M0' ]
+  - 'RMCF0805JT22K0'
+  - 'MCR10EZPF3902'
+  - [ 12, 'GRM21BR71H104KA01L' ]
+  - [ 9, 'RMCF0805JT1K60' ]
+  - [ 2, 'UVZ1C100MDD' ]
+  - [ 2, '500R15N220JV4T' ]
+  - 'MC9S12XDP512MAL'
+section_order:
+  - RECOMMENDED
+  - INJ-H
+  - INJ-L
+  - IGN
+sections:
+  RECOMMENDED:
+    title: Recommended baseline parts
+    description: |
+      Don't uncheck this, unless you know what you are doing!
+    checked: true
+    value: 1
+    min: 0
+    max: 1
+    components:
+      - 'UDQ2916LBTR-T'
+      - [ 4, 'MCR10EZPF1001' ]
+      - [ 2, 'RSF200JB-1R0' ]
+      - [ 4, 'GRM21BR71H104KA01L' ]
+      - [ 4, 'RMCF0805JT1K60' ]
+      - 74HC86DR2G
+  INJ-H:
+    title: High-Z injector circuit configuration
+    description: |
+      Enter the number of injector drivers you want to use.
+    presets:
+      - title: "1-cylinder engine"
+        value: 1
+      - title: "4-cylinder engine, semi-sequential injection"
+        value: 2
+      - title: "4-cylinder engine, sequential injection"
+        value: 4
+    checked: true
+    excludes: INJ-L
+    value: 0
+    min: 0
+    max: 8
+    components:
+      - 'VNP20N07'
+  INJ-L:
+    title: Low-Z injector circuit configuration
+    description: |
+      Enter the number of injector drivers you want to use.
+    presets:
+      - title: "High-Z injector system or ignition only"
+        value: 0
+      - title: "1-cylinder engine"
+        value: 1
+      - title: "4-cylinder engine, semi-sequential injection"
+        value: 2
+      - title: "4-cylinder engine, sequential injection"
+        value: 4
+    checked: false
+    excludes: INJ-H
+    value: 0
+    min: 0
+    max: 8
+    components:
+      - 'RMCF0805JT1K60'
+      - 'MCR10EZPF3901'
+      - 'GRM216R71H103KA01D'
+      - 'WHCR10FET'
+      - '2N6045G'
+      - '1N5364BRLG'
+      - 'LM1949N/NOPB'
+  IGN:
+    title: Ignition circuit configuration
+    description: |
+      Enter the number of ignition drivers you want to use.
+    presets:
+      - title: "Fuel-only"
+        value: 0
+      - title: "Distributor or single-cylinder engine"
+        value: 1
+      - title: "Sequential for 2-cylinder engines"
+        value: 2
+      - title: "Wasted spark for 4-cylinder engines"
+        value: 2
+    checked: false
+    value: 0
+    min: 0
+    max: 4
+    components:
+      - 'MCR10EZPF1001'
+      - 'RMCF0805FT10K0'
+      - 'RMCF0805JT1K60'
+      - 'LH R974-LP-1-0-20-R18'
+      - 'VNP20N07'
+</pre>
 
 ## Validating the database:
 
