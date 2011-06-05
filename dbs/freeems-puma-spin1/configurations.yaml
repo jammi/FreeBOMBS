@@ -35,8 +35,28 @@ components:
   - 'LM2937IMP-5.0/NOPB'
   - 'MC9S12XDP512MAL'
   - 'AK670/2-1-R'
-extras:
-  - id: RECOMMENDED
+section_order:
+  - RECOMMENDED
+  - USB-CONN1
+  - USB-CONN2
+  - INJ-H
+  - INJ-L
+  - IGN
+  - RPM
+  - MAPB
+  - MAPN
+  - AAP
+  - MAF
+  - GPO
+  - O2
+  - EGT
+  - TCPL
+  - AN
+  - STP
+  - ANP
+  - DGP
+sections:
+  RECOMMENDED:
     title: Recommended baseline parts
     description: |
       Don't uncheck this, unless you know what you are doing!
@@ -51,23 +71,35 @@ extras:
       - [ 4, 'GRM21BR71H104KA01L' ]
       - [ 4, 'RMCF0805JT1K60' ]
       - 74HC86DR2G
-  - id: USB-CONN1
+  USB-CONN1:
     title: USB connector kit A to A
     description: |
       This option is disabled by default, because you will probably
       make a custom USB assembly.
-    components:
-      - 
     checked: false
-  - id: USB-CONN2
+    excludes:
+      - USB-CONN2
+    value: 0
+    min: 0
+    max: 1
+    components:
+      - 'UE27AC54100'
+      - 'AK670/2-1-R'
+  USB-CONN2:
     title: USB connector kit A to B
     description: |
       This option is disabled by default, because you will probably
       make a custom USB assembly.
+    checked: true
+    excludes:
+      - USB-CONN1
+    value: 1
+    min: 0
+    max: 1
     components:
-      - 
-    checked: false
-  - id: INJ-H
+      - '690-004-660-023'
+      - 'AU-Y1002-A-R'
+  INJ-H:
     title: High-Z injector circuit configuration
     description: |
       Enter the number of injector drivers you want to use.
@@ -95,7 +127,7 @@ extras:
     max: 8
     components:
       - 'VNP20N07'
-  - id: INJ-L
+  INJ-L:
     title: Low-Z injector circuit configuration
     description: |
       Enter the number of injector drivers you want to use.
@@ -129,7 +161,7 @@ extras:
       - '2N6045G'
       - '1N5364BRLG'
       - 'LM1949N/NOPB'
-  - id: IGN
+  IGN:
     title: Ignition circuit configuration
     description: |
       Enter the number of ignition drivers you want to use.
@@ -154,10 +186,11 @@ extras:
       - 'RMCF0805JT1K60'
       - 'LH R974-LP-1-0-20-R18'
       - 'VNP20N07'
-  - id: RPM
-    title: RPM input circuits
+  RPM:
+    title: Tach input circuits
     description: |
-      You will need at least one RPM input for yaur engine to work.
+      You will need at least one tach input (RPM) for yaur engine to work.
+      You will need two, if you want ignition and/or sequential injection?
     presets:
       - title: Single RPM input
         value: 1
@@ -172,7 +205,7 @@ extras:
       - 'GRM21BR71H104KA01L'
       - 'GRM216R71H103KA01D'
       - 'MAX9924UAUB+'
-  - id: MAPB
+  MAPB:
     title: Boosted MAP input circuits and MAP sensor
     description: |
       You don't need this, unless you are going to read boost levels from a supercharger or turbo. It includes an MPX4250AP sensor.
@@ -190,7 +223,7 @@ extras:
       - 'ERJ-6GEYJ684V'
       - 'CC0805KRX7R9BB152'
       - 'MPX4250AP'
-  - id: MAPN
+  MAPN:
     title: Regular vacuum MAP sensor and its input circuit.
     description: |
       You'll want this to read the vacuum levels from your inlet manifold. It includes an MPX4100AP sensor.
@@ -208,7 +241,7 @@ extras:
       - 'ERJ-6GEYJ684V'
       - 'CC0805KRX7R9BB152'
       - 'MPX4100AP'
-  - id: AAP
+  AAP:
     title: Ambient air pressure sensor and its input circuit.
     description: |
       You'll want this in most cases. It's used for normalization of the MAP vs atmospheric pressure. It includes an MPX4100A sensor.
@@ -220,7 +253,7 @@ extras:
       - 'GRM21BR71H104KA01L'
       - 'GRM216R71H103KA01D'
       - 'MPX4100A'
-  - id: MAF
+  MAF:
     title: Mass air flow sensor circuit
     description: |
       This is an alternative to the MAP sensor.
@@ -234,7 +267,7 @@ extras:
     components:
       - 'RMCF0805FT10K0'
       - 'ERJ-6GEYJ684V'
-  - id: GPO
+  GPO:
     title: General-purpose output
     description: |
       It's not known, whether this circuit works or not.
@@ -247,7 +280,7 @@ extras:
       - 'RMCF0805JT100K'
       - 'CC0805JRNP09BN100'
       - 'VNP20N07'
-  - id: O2
+  O2:
     title: Lambda sensor input circuits
     description: |
       ## NOTE: Includes no parts!
@@ -256,7 +289,7 @@ extras:
     value: 1
     min: 0
     max: 1
-  - id: EGT
+  EGT:
     title: Thermocouple driver IC
     description: |
       This option is not supported properly, so don't check this option.
@@ -270,7 +303,7 @@ extras:
     components:
       - 'GRM21BR71H104KA01L'
       - 'AD8497ARMZ'
-  - id: TCPL
+  TCPL:
     title: Thermistor filtering circuits
     description: |
       ## NOTE: Includes no parts!
@@ -281,7 +314,7 @@ extras:
     value: 2
     min: 0
     max: 4
-  - id: AN
+  AN:
     title: General purpose analog inputs
     description: |
       ## NOTE: Includes no parts!
@@ -290,7 +323,7 @@ extras:
     value: 0
     min: 0
     max: 1
-  - id: STP
+  STP:
     title: Stepper driver
     description: |
       ## NOTE: Includes no parts!
@@ -299,7 +332,7 @@ extras:
     value: 0
     min: 0
     max: 1
-  - id: ANP
+  ANP:
     title: Analog protection circuits
     description: |
       ## Keep this enabled with a quantity of 16 at all times, unless you know what you are doing!
@@ -313,7 +346,7 @@ extras:
       - 'GRM21BR71H104KA01L'
       - '1N4148W-TP'
       - 'MBR0520L'
-  - id: DGP
+  DGP:
     title: Digital protection circuits
     description: |
       ## Keep this disabled at all times, unless you know what you are doing!

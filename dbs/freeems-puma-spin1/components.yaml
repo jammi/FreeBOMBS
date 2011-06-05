@@ -442,11 +442,13 @@
       part: '151-1083-ND'
       price: [ 1.28, USD ] # price break 1
 'UE27AC54100':
-  title: "USB Type A female PCB connector; use type B female instead"
+  title: "USB Type A female PCB connector"
   category: CONN
   mounting: THD
-  obsolete: true
-  replacement: '690-004-660-023'
+  #obsolete: true
+  #replacement: '690-004-660-023'
+  description: |
+    This connector is reserved for USB hosts. Should not be used on devices.
   suppliers:
     digikey:
       part: 'UE27AC54100-ND'
@@ -702,8 +704,10 @@
       price: [ 5.75, USD ] # price break 1
 'AK670/2-1-R':
   title: USB A-A Male cable
-  obsolete: true
-  replacement: AU-Y1002-A-R
+  #obsolete: true
+  #replacement: AU-Y1002-A-R
+  description: |
+    Special USB A-A male cable. Not standard and should not be used in any project.
   category: cables
   suppliers:
     digikey:

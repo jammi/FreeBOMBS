@@ -42,14 +42,21 @@ module FreeBOMBS; class DBHandler
     @db['components']
   end
 
+  def configurations
+    @db['configurations']
+  end
+
   def valid_url?( url )
     ( url.start_with?('http://') or url.start_with?('https://') ) and url.length > 10
   end
+
+  def test; end
 
   def initialize( db_path )
     @db_path = db_path
     files_exist?
     read_data
+    test
   end
 
 end; end
