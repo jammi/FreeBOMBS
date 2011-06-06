@@ -290,5 +290,24 @@ class CheckDBSanity < FreeBOMBS::DBHandler
 
 end
 
-test_db_path = File.join( base_path, 'dbs', 'freeems-puma-spin1' )
-CheckDBSanity.new( test_db_path )
+test_dbs_path = File.join( base_path, 'dbs' )
+if ARGV.length == 0
+  Dir.entries( test_dbs_path ).each do |test_db_name|
+    next if test_db_name.start_with?( '.' )
+    test_db_path = File.expand_path( test_db_name, test_dbs_path )
+    next unless File.directory?( test_db_path )
+    puts
+    puts "Validating project database #{test_db_name}.."
+    CheckDBSanity.new( test_db_path )
+    puts "Validation of #{test_db_name} completed without errors."
+    puts
+  end
+elsif ARGV.length == 1 and Dir.entries( test_dbs_path ).include? ARGV.first
+  test_db_path = File.expand_path( ARGV.first, test_dbs_path )
+  CheckDBSanity.new( test_db_path )
+else
+  puts "FreeBOMBS database validation tool"
+  puts "Usage: #{$0} [database_name]"
+  puts "The database_name is optional."
+  puts "By default all databases in the dbs directory are validated."
+end
