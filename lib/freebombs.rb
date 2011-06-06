@@ -27,11 +27,16 @@ module FreeBOMBS
     end
     read_config( strings_path )
   end
-  def self.init( conf=false, strings=false )
+  def self.init( db_name=false, conf=false, strings=false )
     conf = read_config['freebombs'] unless conf
     strings = read_strings unless strings
+    if db_name
+      db_path = File.expand_path( db_name, conf['dbs_path'] )
+    else
+      db_path = File.expand_path( conf['db_name'], conf['dbs_path'] )
+    end
     opt = {
-      :db_path => conf['db_path'],
+      :db_path => db_path,
       :strings => LocaleStrings.new( strings ),
       :conf    => LocaleStrings.new( conf )
     }
@@ -40,8 +45,19 @@ module FreeBOMBS
     Components.new( opt )
     Configurations.new( opt )
   end
+  def self.cli_usage
+    puts <<END
+Usage: #{$0} [database_name]
+END
+  end
   def self.cli
-    init
+    if ARGV.length == 0
+      init
+    elsif ARGV.length == 1
+      init ARGV.first
+    else
+      cli_usage
+    end
     puts "CLI mode not implemented yet!"
   end
 end
