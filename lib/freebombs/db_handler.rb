@@ -15,7 +15,7 @@ module FreeBOMBS; class DBHandler
 
   def files_exist?
     dbs.each do |name|
-      error "Missing database file: #{file}.yaml" unless File.exist? yaml_path( name )
+      error "Missing database file: #{name}.yaml" unless File.exist? yaml_path( name )
     end
   end
 

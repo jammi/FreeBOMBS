@@ -54,7 +54,8 @@ END
     if ARGV.length == 0
       init
     elsif ARGV.length == 1
-      init ARGV.first
+      db_name = ARGV.first
+      init db_name
     else
       cli_usage
     end

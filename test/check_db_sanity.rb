@@ -14,7 +14,7 @@ require 'freebombs/db_handler'
 class CheckDBSanity < FreeBOMBS::DBHandler
 
   def log( message )
-    puts message
+    puts message if $verbose
   end
 
   def error( message )
@@ -24,6 +24,14 @@ class CheckDBSanity < FreeBOMBS::DBHandler
     exit
   end
 
+  def info( message )
+    puts message if $verbose
+  end
+
+  def warn( message )
+    puts "Warning: "+message
+  end
+
   def valid_url?( url )
     ( url.start_with?('http://') or url.start_with?('https://') ) and url.length > 10
   end
@@ -31,7 +39,7 @@ class CheckDBSanity < FreeBOMBS::DBHandler
   def check_suppliers
     mandatory_keys = [ 'title', 'homepage', 'currency' ]
     suppliers.each_key do |name|
-      puts "Checking supplier: #{name}"
+      info "Checking supplier: #{name}"
       supplier = suppliers[name]
       mandatory_keys.each do |key|
         error "Missing #{key} for supplier #{name}" unless supplier.has_key? key
@@ -62,7 +70,7 @@ class CheckDBSanity < FreeBOMBS::DBHandler
     #  - the component must have a datasheet or a description field defined
     mandatory_keys = [ 'title' ]
     components.each_key do |mfg_id|
-      puts "Checking component: #{mfg_id}"
+      info "Checking component: #{mfg_id}"
       component = components[mfg_id]
       mandatory_keys.each do |key|
         error "Component #{mfg_id} is missing #{key}" unless component.has_key? key
@@ -71,14 +79,13 @@ class CheckDBSanity < FreeBOMBS::DBHandler
         if component.has_key? 'replacement'
           replacement = component['replacement']
           if components.has_key? replacement
-            puts "..obsolete, replacement: #{replacement}"
+            info "..obsolete, replacement: #{replacement}"
             next
           else
-            puts component.inspect
-            error "Missing replacement component id: #{replacement.inspect}"
+            error "Missing replacement for obsolete component id: #{mfg_id}"
           end
         else
-          puts "..obsolete, no replacement!"
+          warn "Obsolete component #{mfg_id} has replacement!"
         end
       else
         component_supply = component['suppliers']
@@ -89,7 +96,7 @@ class CheckDBSanity < FreeBOMBS::DBHandler
           if component_supply.has_key? supplier_name
             validate_supply( component_supply[supplier_name] )
           else
-            puts "..no supply information for supplier: #{supplier_name}"
+            warn "Component #{mfg_id} has no supply information for supplier: #{supplier_name}"
           end
         end
         if component.has_key? 'datasheet'
@@ -124,7 +131,7 @@ class CheckDBSanity < FreeBOMBS::DBHandler
     arr
   end
 
-  def check_component_references( component_references )
+  def check_component_references( component_references, section_name )
     component_references.each do |component_ref|
       unless [ Array, String ].include? component_ref.class
         error "Expected the component as an Array or a String, got #{component.class}"
@@ -150,7 +157,8 @@ class CheckDBSanity < FreeBOMBS::DBHandler
       component = components[component_id]
       if component['obsolete']
         if component.has_key? 'replacement'
-          puts "..obsolete component defined: #{component_id}, it has a replacement: #{component['replacement'].inspect}"
+          warn "Obsolete component #{component_id} used in the configuration section of #{section_name}"
+          info "         It might have a replacement: #{component['replacement'].inspect}"
           @components_used.push component['replacement'] unless @components_used.include? component['replacement']
         else
           error "Obsolete component without replacement defined: #{component_id}"
@@ -160,7 +168,7 @@ class CheckDBSanity < FreeBOMBS::DBHandler
   end
 
   def check_config_section( section_name, sections )
-    puts "Checking configurable section #{section_name}"
+    info "Checking configurable section #{section_name}"
     section = sections[section_name]
     unless section.class == Hash
       error "The section must be a Hash, got: #{section.class}"
@@ -174,7 +182,7 @@ class CheckDBSanity < FreeBOMBS::DBHandler
     warn_keys = [ 'components' ]
     warn_keys.each do |key|
       unless section.has_key? key
-        puts "..missing #{key} definition"
+        warn "The section #{section_name} is missing the #{key} definition"
       end
     end
     { 'title' => String,
@@ -234,13 +242,13 @@ class CheckDBSanity < FreeBOMBS::DBHandler
       end
     end
     if section.has_key? 'components'
-      check_component_references( section['components'] )
+      check_component_references( section['components'], section_name )
     end
   end
 
   def check_configurations
     mandatory_keys = [ 'title', 'description', 'components', 'sections', 'section_order' ]
-    puts "Checking configuration validity"
+    info "Checking configuration validity"
     mandatory_keys.each do |key|
       error "The configuration is missing #{key}" unless configurations.has_key? key
     end
@@ -261,7 +269,7 @@ class CheckDBSanity < FreeBOMBS::DBHandler
       error "The sections have these unordered sections: #{extra_sections.join(', ')}"
     end
     @components_used = []
-    check_component_references( configurations['components'] )
+    check_component_references( configurations['components'], 'Default' )
     section_order.each do |section_name|
       check_config_section( section_name, sections )
     end
@@ -285,29 +293,67 @@ class CheckDBSanity < FreeBOMBS::DBHandler
     check_components
     check_configurations
     check_unused_components
-    puts "Validation complete."
+    info "Validation complete."
   end
 
 end
 
-test_dbs_path = File.join( base_path, 'dbs' )
-if ARGV.length == 0
+def usage
+  puts
+  puts "FreeBOMBS database validation tool"
+  puts
+  puts "Usage: #{$0} [-v] [database_name]"
+  puts
+  puts "The -v flag switches verbose mode on."
+  puts "The database_name is optional."
+  puts "By default all databases in the dbs directory are validated."
+end
+
+def test_db( test_dbs_path, db_name=false )
+  if db_name
+    test_db_path = File.expand_path( db_name, test_dbs_path )
+  else
+    test_db_path = test_dbs_path
+  end
+  if File.exists?( test_db_path ) and File.directory?( test_db_path )
+    CheckDBSanity.new( test_db_path )
+  else
+    puts "Error: Nonexistent or invalid project path: #{test_db_path}"
+    exit
+  end
+end
+
+def test_all_dbs( test_dbs_path )
   Dir.entries( test_dbs_path ).each do |test_db_name|
     next if test_db_name.start_with?( '.' )
     test_db_path = File.expand_path( test_db_name, test_dbs_path )
     next unless File.directory?( test_db_path )
     puts
     puts "Validating project database #{test_db_name}.."
-    CheckDBSanity.new( test_db_path )
+    test_db( test_db_path )
     puts "Validation of #{test_db_name} completed without errors."
     puts
   end
-elsif ARGV.length == 1 and Dir.entries( test_dbs_path ).include? ARGV.first
-  test_db_path = File.expand_path( ARGV.first, test_dbs_path )
-  CheckDBSanity.new( test_db_path )
-else
-  puts "FreeBOMBS database validation tool"
-  puts "Usage: #{$0} [database_name]"
-  puts "The database_name is optional."
-  puts "By default all databases in the dbs directory are validated."
 end
+
+$verbose = false
+test_dbs_path = File.join( base_path, 'dbs' )
+if ARGV.length == 0
+  test_all_dbs( test_dbs_path )
+elsif ARGV.length == 1
+  if ARGV.first == '-v'
+    $verbose = true
+    test_all_dbs( test_dbs_path )
+  elsif ARGV.first.start_with?('-')
+    usage
+  else
+    test_db( test_dbs_path, ARGV.first )
+  end
+elsif ARGV.length == 2 and ARGV.first == '-v'
+  $verbose = true
+  test_db( test_dbs_path, ARGV[1] )
+else
+  usage
+end
+
+
