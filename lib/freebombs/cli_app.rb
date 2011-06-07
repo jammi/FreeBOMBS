@@ -56,7 +56,7 @@ module FreeBOMBS; class CLIApp
     end
     component_list_footer
     sum_rjust = format_currency( price_sum, 2 ).rjust( 11 )
-    puts " SUM:                                                       |#{sum_rjust}"
+    puts " Total:                                                     |#{sum_rjust}"
     puts
   end
   
@@ -98,11 +98,11 @@ module FreeBOMBS; class CLIApp
     puts "#{checkbox} #{section_title}"
   end
 
-  def puts_sections( section_specs )
+  def puts_sections
     puts
     puts "Available configuration options:"
     puts "--------------------------------"
-
+    sections_spec = @data[:sections]
     @data[:sections].each do |section_spec|
       puts_section section_spec
     end
@@ -152,26 +152,196 @@ module FreeBOMBS; class CLIApp
     puts configurations.description
     puts
     # puts_baseline_config
-    puts_sections( @data[:sections] )
+    puts_sections
     puts
   end
 
-  def main_menu
+  def get_section( section_id )
+    @data[:sections].each do |section_spec|
+      return section_spec if section_spec[:id] == section_id
+    end
+  end
+
+  def toggle_section_on( section_spec )
+    toggle_sections_off( section_spec[:excludes] )
+    section_spec[:checked] = true
+  end
+
+  def toggle_sections_off( section_ids )
+    @data[:sections].each do |section_spec|
+      section_spec[:checked] = false if section_ids.include? section_spec[:id]
+    end
+  end
+
+  def toggle_section_off( section_spec )
+    section_spec[:checked] = false
+  end
+
+  def toggle_section( section_id )
+    section_spec = get_section( section_id )
+    if section_spec[:checked] == true
+      toggle_section_off( section_spec )
+    else
+      toggle_section_on( section_spec )
+    end
+  end
+
+  def toggle_sections_menu
     choose do |menu|
-      menu.choice( "View overview" ) do
-        puts_main
+      @data[:sections].each do |section_spec|
+        if section_spec[:checked]
+          checkbox = "[X]"
+        else
+          checkbox = "[ ]"
+        end
+        section_title = sections[ section_spec[:id] ].title
+        menu.choice( "#{checkbox} (#{section_spec[:id]}): #{section_title}" ) do |menu_str|
+          section_id = (menu_str.gsub(/(\[[X\ ]\]) \((.*?)\)\: (.*?)$/) { $2 }).to_sym
+          toggle_section( section_id )
+        end
       end
-      menu.choice( "View baseline components" ) do
-        puts_baseline_config
+      menu.choice( "Return to configuration sections menu" ) do
+        @return_sections = true
       end
-      menu.choice( "View BOM" ) do
-        bom
+      menu.choice( "Return to main menu" ) do
+        @return_sections = true
+        @return = true
       end
+      menu.prompt = "Toggle section>"
+    end
+  end
+
+  def view_section_details( section_id )
+    section_spec = get_section( section_id )
+    section = sections[ section_id ]
+    title = section.title
+    description = section.description
+    puts
+    puts "Details of section '#{title}'"
+    puts
+    puts title
+    puts '-' * title.length
+    puts description
+    puts
+    puts "Enabled: #{section_spec[:checked]}"
+    puts "Amount:  #{section_spec[:value]} (min: #{section_spec[:min]}, max: #{section_spec[:max]})"
+    puts
+    unless section_spec[:components].empty?
+      puts "Components:"
+      puts_components( section_spec[:components] )
+    end
+  end
+
+  def set_section_value
+    section_spec = get_section( @selected_section_id )
+    section_spec[:value] = ask( "Set the amount of this configuration (min #{section_spec[:min]}, max #{section_spec[:max]}, currently #{section_spec[:value]}): ", Integer )
+  end
+
+  def section_details_menu( section_id )
+    view_section_details( section_id )
+    puts
+    choose do |menu|
+      section_spec = get_section( section_id )
+      @selected_section_id = section_id
+      menu.choice( "Change amount (currently #{section_spec[:value]})" ) do
+        section_spec = get_section( @selected_section_id )
+        set_section_value
+        set_section_value while section_spec[:value] < section_spec[:min] or section_spec[:value] > section_spec[:max] 
+      end
+      menu.choice( "Return to section details menu" ) do
+        @return_section_details = true
+      end
+      menu.choice( "Return to configuration sections menu" ) do
+        @return_section_details = true
+        @return_sections = true
+      end
+      menu.choice( "Return to main menu" ) do
+        @return_section_details = true
+        @return_sections = true
+        @return = true
+      end
+      menu.prompt = "Section details>"
+    end
+  end
+
+  def view_section_details_menu
+    puts
+    puts "Choose the configuration section to view/edit:"
+    puts
+    choose do |menu|
+      @data[:sections].each do |section_spec|
+        section_title = sections[ section_spec[:id] ].title
+        menu.choice( "(#{section_spec[:id]}): #{section_title}" ) do |menu_str|
+          section_id = (menu_str.gsub(/\((.*?)\)\: (.*?)$/) { $1 }).to_sym
+          @return_section_details = false
+          section_details_menu( section_id ) until @return_section_details
+        end
+      end
+      menu.choice( "Return to configuration sections menu" ) do
+        @return_sections = true
+      end
+      menu.choice( "Return to main menu" ) do
+        @return_sections = true
+        @return = true
+      end
+      menu.prompt = "Toggle section>"
+    end
+  end
+
+  def set_multi_menu
+    @multi = ask( "Enter amount of configurations to order (min 1, currently #{@multi}): ", Integer )
+  end
+
+  def settings_menu
+    choose do |menu|
       menu.choice( "Set supplier (currently #{supplier_title( @data[:supplier] )})" ) do
         set_supplier_menu
       end
       menu.choice( "Set currency (currently #{@data[:currency]})" ) do
         set_currency_menu
+      end
+      menu.choice( "Set amount of configurations to order (currently #{@multi})" ) do
+        set_multi_menu
+        set_multi_menu while @multi < 1
+      end
+      menu.choice( "Return to main menu" ) do
+        @return = true
+      end
+      menu.prompt = "Settings>"
+    end
+  end
+
+  def sections_menu
+    puts_sections
+    puts
+    choose do |menu|
+      menu.choice( "Toggle sections" ) do
+        @return_sections = false; toggle_sections_menu until @return_sections
+      end
+      menu.choice( "View section details" ) do
+        @return_sections = false; view_section_details_menu until @return_sections
+      end
+      menu.choice( "Return to main menu" ) do
+        @return = true
+      end
+      menu.prompt = "Configuration sections>"
+    end
+  end
+
+  def main_menu
+    puts_main
+    choose do |menu|
+      menu.choice( "View baseline components" ) do
+        puts_baseline_config
+      end
+      menu.choice( "Configuration sections menu" ) do 
+        @return = false; sections_menu until @return
+      end
+      menu.choice( "View BOM" ) do
+        bom
+      end
+      menu.choice( "Settings menu" ) do
+        @return = false; settings_menu until @return
       end
       menu.choice( "Exit" ) do
         exit
@@ -183,7 +353,6 @@ module FreeBOMBS; class CLIApp
   def initialize( opt )
     @opt = opt
     setup
-    puts_main
     main_menu until false
   end
 end; end
