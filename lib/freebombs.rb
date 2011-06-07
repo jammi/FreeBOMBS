@@ -15,25 +15,26 @@ require 'freebombs/component_list'
 require 'freebombs/config_section'
 require 'freebombs/config_sections'
 require 'freebombs/configurations'
+require 'freebombs/calculator'
 
 $verbose = false
 $md_to_html = true
 module FreeBOMBS
-  def self.read_config( conf_path=false )
+  def self.read_config( conf_path=nil )
     unless conf_path
       base_path = File.split( File.split( File.expand_path( __FILE__ ) ).first ).first
       conf_path = File.expand_path( 'conf/config.yaml', base_path )
     end
     YAML.load_file( conf_path )
   end
-  def self.read_strings( strings_path=false )
+  def self.read_strings( strings_path=nil )
     unless strings_path
       base_path = File.split( File.split( File.expand_path( __FILE__ ) ).first ).first
       strings_path = File.expand_path( 'rsrc/strings.yaml', base_path )
     end
     read_config( strings_path )
   end
-  def self.init( db_name=false, conf=false, strings=false )
+  def self.init( db_name=nil, conf=nil, strings=nil )
     conf = read_config['freebombs'] unless conf
     strings = read_strings unless strings
     if db_name
@@ -50,22 +51,6 @@ module FreeBOMBS
     Suppliers.new( opt )
     Components.new( opt )
     Configurations.new( opt )
-
-
-
-    exported = opt[:configurations].export
-    puts " Price list:"
-    puts " #{'Component ID'.ljust(32)}  |   Price    "
-    price_list = opt[:configurations].calculate_price( exported, :digikey, 1, :EUR )
-    price_sum = 0
-    price_list.each do |component_id, price |
-      price_sum += price
-      puts " #{component_id.to_s.ljust(32)}  |  #{((price*100).round/100.0).to_s.rjust(6)} EUR"
-    end
-      puts " #{'SUM:'.ljust(32)}  |  #{((price_sum*100).round/100.0).to_s.rjust(6)} EUR"
-
-
-
     opt
   end
   def self.cli_usage
@@ -73,17 +58,21 @@ module FreeBOMBS
 Usage: #{$0} [database_name]
 END
   end
+  def self.init_cli( db_name=false )
+    opt = init( db_name )
+    require 'freebombs/cli_app'
+    CLIApp.new( opt )
+  end
   def self.cli
     $md_to_html = false
     if ARGV.length == 0
-      init
+      init_cli
     elsif ARGV.length == 1
       db_name = ARGV.first
-      init db_name
+      init_cli db_name
     else
       cli_usage
     end
-    puts "CLI mode not implemented yet!"
   end
 end
 
