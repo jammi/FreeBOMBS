@@ -2,6 +2,10 @@
 # Copyright 2011 Juha-Jarmo Heinonen <o@sorsacode.com>
 
 module FreeBOMBS; class Components
+
+  include CommonMethods
+  def opt_key; :components; end
+
   class ComponentBase
     include LocaleMethods
     attr_reader :id, :title, :descr, :img
@@ -43,10 +47,12 @@ module FreeBOMBS; class Components
     def obsolete?; false; end
     def to_s; "#<Component #{@id.inspect}: @title=#{@title.inspect}>"; end
   end
+
   class ObsoleteComponent < ComponentBase
     def obsolete?; true; end
     def to_s; "#<ObsoleteComponent #{@id.inspect}: @title=#{@title.inspect}, @replacement_id=#{@replacement_id.inspect}>"; end
   end
+  
   class Component < ComponentBase
     def has_supplier?( supplier_id )
       ( not @supply[ supplier_id ].nil? )
@@ -70,13 +76,13 @@ module FreeBOMBS; class Components
       end
     end
   end
+  
   attr_accessor :components
-  def db
-    @opt[:db_handler]
-  end
+
   def suppliers
     @opt[:suppliers]
   end
+  
   def []( component_id )
     component_id = component_id.to_sym
     unless @components.has_key? component_id
@@ -87,6 +93,7 @@ module FreeBOMBS; class Components
     end
     @components[ component_id ]
   end
+  
   def setup
     @components = {}
     db.components.each do |component_id, component_spec|
@@ -99,10 +106,6 @@ module FreeBOMBS; class Components
       @components[component_id] = component
     end
   end
-  def initialize( opt )
-    opt[:components] = self
-    @opt = opt
-    setup
-  end
+  
 end; end
 

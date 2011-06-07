@@ -10,6 +10,7 @@ module FreeBOMBS
       @opt[:config]
     end
     def md( md_src )
+      return md_src unless $md_to_html
       BlueCloth.new( md_src ).to_html
     end
   end
