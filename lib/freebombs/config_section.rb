@@ -9,7 +9,7 @@ module FreeBOMBS; class ConfigSection
     return false unless has_exclusions?
     @excludes.include?( section_id )
   end
-  attr_reader :checked, :presets
+  attr_reader :checked, :presets, :title, :description, :value, :min, :max
   def checked?; @checked; end
   def presets?; ( not @presets.empty? ); end
   def setup( data )
@@ -51,8 +51,6 @@ module FreeBOMBS; class ConfigSection
   end
   def export
     { :id => @id,
-      :title => @title,
-      :description => @description,
       :value => @value,
       :min => @min,
       :max => @max,

@@ -20,7 +20,9 @@ module FreeBOMBS; class Calculator
     outp
   end
 
-  def calculate_price( data, supplier_id, multi=1, currency=:EUR )
+  def calculate_price( data, multi=1 )
+    supplier_id = data[:supplier]
+    currency = data[:currency]
     unless @opt[:suppliers].supplier_ids.include? supplier_id
       error "Configurations#calculate_price: unknown supplier: #{supplier.inspect}"
       return
@@ -50,3 +52,4 @@ module FreeBOMBS; class Calculator
   end
 
 end; end
+

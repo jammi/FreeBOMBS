@@ -20,18 +20,17 @@ module FreeBOMBS; class Configurations
     @sections = ConfigSections.new( @opt, data['section_order'], data['sections'] )
   end
 
-  def default_bom
+  def components; @components; end
 
-  end
+  def sections; @sections; end
 
   def export
     suppliers = @opt[:suppliers].supplier_ids
-    { :title => @title,
-      :suppliers => suppliers,
+    { :suppliers => suppliers,
       :supplier => suppliers.first,
-      :description => @description,
       :components => @components.export,
-      :sections => @sections.export
+      :sections => @sections.export,
+      :currency => @opt[:conf].currency.to_sym
     }
   end
 

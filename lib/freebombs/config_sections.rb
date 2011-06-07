@@ -14,7 +14,11 @@ module FreeBOMBS; class ConfigSections
   end
   def initialize( opt, section_order, sections )
     @opt = opt
+    @opt[:sections] = self
     setup( section_order, sections )
+  end
+  def []( section_id )
+    @sections_by_id[ section_id ]
   end
   def export
     arr = []

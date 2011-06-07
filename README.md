@@ -272,6 +272,7 @@ sections:
 - RubyGems (if Ruby version is below 1.9)
 - ``gem install yaml`` (if Ruby version is below 1.9)
 - ``gem install bluecloth`` (used for the Markdown to html conversion)
+- ``gem install highline`` (used for the CLI)
  
 
 ### Run the valitation script like this:

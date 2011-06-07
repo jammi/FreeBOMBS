@@ -40,5 +40,7 @@ module FreeBOMBS; class Suppliers
     end
   end
   
+  alias [] supplier
+  
 end; end
 
