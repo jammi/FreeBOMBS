@@ -7,7 +7,7 @@ module FreeBOMBS; class Suppliers
   def opt_key; :suppliers; end
 
   class Supplier
-    attr_reader :id, :title, :homepage
+    attr_reader :id, :title, :currency, :homepage
     def initialize( opt, id, spec )
       @suppliers = opt[:suppliers]
       @id = id

@@ -5,7 +5,6 @@ module FreeBOMBS; class ConfigSections
   def setup( section_order, sections )
     @section_order = []
     @sections_by_id = {}
-    section_list = []
     section_order.each do |section_id|
       section_spec = sections[section_id]
       section_id = section_id.to_sym
@@ -16,6 +15,13 @@ module FreeBOMBS; class ConfigSections
   def initialize( opt, section_order, sections )
     @opt = opt
     setup( section_order, sections )
+  end
+  def export
+    arr = []
+    @section_order.each do |section_id|
+      arr.push @sections_by_id[ section_id ].export
+    end
+    arr
   end
 end; end
 

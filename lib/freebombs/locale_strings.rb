@@ -24,22 +24,24 @@ module FreeBOMBS
   end
   class Price
     include LocaleMethods
-    def to_euro
+    def to_eur
       @price
     end
-    alias to_eur to_euro
+    alias to_euro to_eur
     def to_usd
       @price * usd_rate
     end
-    def price
-      return to_eur if conf.currency == 'EUR'
-      return to_usd if conf.currency == 'USD'
+    def to_currency( currency=conf.currency )
+      return to_eur if currency == :EUR
+      return to_usd if currency == :USD
     end
-    def initialize( price, currency='USD' )
-      if currency == 'EUR'
+    def initialize( price, currency=:USD )
+      if currency == :EUR
         @price = price
-      elsif currency == 'USD'
+      elsif currency == :USD
         @price = from_usd( price )
+      else
+        throw "Invalid currency: #{currency.inspect}"
       end
     end
   private
