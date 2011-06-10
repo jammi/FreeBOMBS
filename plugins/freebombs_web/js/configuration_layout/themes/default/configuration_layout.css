@@ -1,0 +1,11 @@
+.description h1,
+.description h2,
+.description h3,
+.description h4,
+.description p {
+  margin-top: 0; margin-bottom: 0;
+}
+.description h1 { font-size: 20px; }
+.description h2 { font-size: 18px; }
+.description h3 { font-size: 16px; }
+.description h4 { font-size: 14px; }
