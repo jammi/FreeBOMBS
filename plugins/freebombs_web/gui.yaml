@@ -29,6 +29,13 @@ subviews:
       rect: auto
       options:
         label: :strings.configuration_title
+      subviews:
+        - class: ConfigurationLayout
+          rect: [ 8, 8, ~, ~, 8, 8 ]
+          options:
+            style:
+              border: '1px solid #ccc'
+            items: :configuration_data
     - class: HTabItem
       rect: auto
       options:

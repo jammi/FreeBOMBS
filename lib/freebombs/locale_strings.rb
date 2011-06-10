@@ -11,7 +11,11 @@ module FreeBOMBS
     end
     def md( md_src )
       return md_src unless $md_to_html
-      BlueCloth.new( md_src ).to_html
+      html = BlueCloth.new( md_src ).to_html
+      if html.start_with?('<p>') and html.end_with?('</p>')
+        html = html[3..-5]
+      end
+      html
     end
   end
   class LocaleStrings
