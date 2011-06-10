@@ -74,5 +74,8 @@ END
       cli_usage
     end
   end
+  def self.init_web( db_name, conf, strings )
+    init( db_name, conf, strings )
+  end
 end
 

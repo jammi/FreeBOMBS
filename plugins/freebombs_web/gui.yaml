@@ -1,0 +1,73 @@
+version: 0.8
+type: GUITree
+
+dependencies:
+- default_theme
+- controls
+- lists
+- custom_layouts
+
+class: RSence.GUIApp
+options:
+  label: :app_title
+subviews:
+- class: HView
+  rect: [ 0, 0, 960, 400, 0, 0 ]
+  subviews:
+  - class: HStringView
+    rect: [ 8, 8, ~, 32, 8, ~ ]
+    options:
+      value: :app_title
+      style:
+        font-size: 28px
+        text-align: center
+  - class: HTab
+    rect: [ 8, 42, 600, ~, ~, 42 ]
+    bind: :values.tab_index
+    subviews:
+    - class: HTabItem
+      rect: auto
+      options:
+        label: :strings.configuration_title
+    - class: HTabItem
+      rect: auto
+      options:
+        label: :strings.settings_title
+      subviews:
+        - class: HStringView
+          rect: [ 8, 8, 584, 20 ]
+          options:
+            value: :strings.settings_help
+        - class: SettingsLayout
+          rect: [ 8, 28, 584, 300 ]
+          options:
+            style:
+              border: '1px solid #ccc'
+            items:
+            - label: :strings.currency_label
+              value: :values.currency
+              menu: :lists.currencies
+            - label: :strings.supplier_label
+              value: :values.supplier
+              menu: :lists.suppliers
+            - label: :strings.amount_to_order_label
+              value: :values.multi
+              min: 1
+              max: 100
+  - class: HView
+    rect: [ 616, 43, ~, ~, 8, 42 ]
+    options:
+      style:
+        border: '1px solid #888'
+    subviews:
+    - class: HStringView
+      rect: [ 8, 3, ~, 20, 8, ~ ]
+      options:
+        value: :strings.bom_title
+        style:
+          font-weight: bold
+    - class: HScrollView
+      rect: [ 0, 32, ~, ~, 0, 0 ]
+      options:
+        scrollX: false
+        scrollY: auto

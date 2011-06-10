@@ -1,0 +1,14 @@
+tab_index:
+  data: 0
+  restore: false
+currency:
+  msg_call: get_currency
+  responder: set_currency
+  restore: false
+multi:
+  data: 1
+  restore: false
+  responder: set_multi
+supplier:
+  msg_call: get_supplier
+  restore: false

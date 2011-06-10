@@ -1,3 +1,14 @@
 # Default english string locale
-supplier: Supplier
 data_sheet: Data Sheet
+configuration_title: Configurations
+settings_title: Preferences
+currency_label: 'Currency:'
+supplier_label: 'Supplier:'
+amount_to_order_label: 'Amount to order:'
+settings_help: Change these settings according to your preferences
+bom_title: Bill of materials
+currencies:
+- - EUR
+  - 'Euro (&euro;)'
+- - USD
+  - 'United States Dollar (US $)'

@@ -1,4 +1,11 @@
-
+# RSence-specific config:
+:index_html:
+  :title: FreeBOMBS
+:lib_paths:
+  - ./lib
+:transporter_conf:
+  :client_autoreload: true
+# FreeBOMBS-specific config:
 freebombs:
   dbs_path: ./dbs
   db_name: test
