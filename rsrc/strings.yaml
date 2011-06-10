@@ -12,3 +12,8 @@ currencies:
   - 'Euro (&euro;)'
 - - USD
   - 'United States Dollar (US $)'
+configuration_layout:
+  view_components: Show Components
+  view_instructions: Assembly Instructions
+  sections_title: 'Configurable Sections:'
+  enable: Enable

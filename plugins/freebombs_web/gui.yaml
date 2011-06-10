@@ -36,6 +36,7 @@ subviews:
             style:
               border: '1px solid #ccc'
             items: :configuration_data
+            strings: :strings.configuration_layout
     - class: HTabItem
       rect: auto
       options:

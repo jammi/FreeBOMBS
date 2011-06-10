@@ -95,7 +95,7 @@ class FreeBOMBS_App < GUIPlugin
     msg.user_info[:freebombs]
   end
   def set_component_enabled( msg, value )
-    metadata = value.meta
+    metadata = value.meta[:spec]
     data = value.data
     orig = metadata[0]
     if [ true, false ].include? data and data != orig
@@ -107,7 +107,7 @@ class FreeBOMBS_App < GUIPlugin
     true
   end
   def set_component_count( msg, value )
-    metadata = value.meta
+    metadata = value.meta[:spec]
     data = value.data
     orig = metadata[1]
     if data.class == Fixnum and data >= 0 and data != orig
@@ -129,11 +129,13 @@ class FreeBOMBS_App < GUIPlugin
     end
   end
   def set_section_enabled( msg, value )
-    metadata = value.meta
+    metadata = value.meta[:spec]
     data = value.data
     orig = metadata[:enabled]
     if [ true, false ].include? data and data != orig
       metadata[:checked] = data
+      puts metadata.inspect
+      puts metadata[:excludes].inspect
       unless metadata[:excludes].empty?
         disable_sections( msg, metadata[:excludes] )
       end
@@ -144,7 +146,7 @@ class FreeBOMBS_App < GUIPlugin
     true
   end
   def set_section_count( msg, value )
-    metadata = value.meta
+    metadata = value.meta[:spec]
     data = value.data
     min  = metadata[:min]
     max  = metadata[:max]
