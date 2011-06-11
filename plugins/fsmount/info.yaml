@@ -1,0 +1,6 @@
+
+
+:config:
+  :mount:
+    '/img/': '../../rsrc/img/'
+
