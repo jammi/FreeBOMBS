@@ -22,7 +22,7 @@ subviews:
         font-size: 28px
         text-align: center
   - class: HTab
-    rect: [ 8, 42, 600, ~, ~, 42 ]
+    rect: [ 8, 20, 600, ~, ~, 8 ]
     bind: :values.tab_index
     subviews:
     - class: HTabItem
@@ -47,7 +47,7 @@ subviews:
           options:
             value: :strings.settings_help
         - class: SettingsLayout
-          rect: [ 8, 28, 584, 300 ]
+          rect: [ 8, 28, 584, 96 ]
           options:
             style:
               border: '1px solid #ccc'
@@ -77,5 +77,33 @@ subviews:
     - class: HScrollView
       rect: [ 0, 32, ~, ~, 0, 0 ]
       options:
-        scrollX: false
+        scrollX: auto
         scrollY: auto
+      subviews:
+      - class: HControl
+        extend:
+          defaultEvents:
+            contextMenu: true
+          contextMenu: 'function(){return true;}'
+          isAbsolute: false
+          isRelative: true,
+          displayMode: inline,
+          refreshValue: |
+            function(){
+              this.base();
+              if( typeof this.value == 'string' ){
+                this.setHTML( '<pre>'+this.value+'</pre>' );
+              }
+            }
+        rect: [ 0, 0, ~, ~, 0, 0 ]
+        bind: :values.bom
+- class: HButton
+  rect: [ ~, ~, 100, 24, 8, 8 ]
+  options:
+    label: :strings.export_button
+    enabled: false
+- class: HButton
+  rect: [ ~, ~, 100, 24, 116, 8 ]
+  options:
+    label: :strings.print_button
+    enabled: false

@@ -10,25 +10,13 @@ class FreeBOMBS_App < GUIPlugin
   def suppliers; @opt[:suppliers]; end
   def calculator; @calculator; end
 
-  def format_currency( price, decimal_places=3 )
-    deci_round = 10**decimal_places
-    number_adjusted = (price*deci_round).round/deci_round.to_f
-    ( number_whole, number_deci ) = number_adjusted.to_s.split('.')
-    number_deci += '0' * ( decimal_places-number_deci.length )
-    number_string = number_whole+'.'+number_deci
-    if @data[:currency] == :EUR
-      number_string += ' &euro;'
-    elsif @data[:currency] == :USD
-      number_string = '$'+number_string
-    end
-    number_string
-  end
   def open
     super
     @conf = RSence.config['freebombs']
     @strings = YAML.load_file( @conf['locale_strings'] )
     @opt = FreeBOMBS.init_web( @conf['db_name'], @conf, @strings )
     @currencies_list = @strings['currencies']
+    @calculator = FreeBOMBS::Calculator.new( @opt )
   end
   def suppliers_list( msg )
     arr = []
@@ -67,6 +55,8 @@ class FreeBOMBS_App < GUIPlugin
       section_id = section_spec[:id]
       section = sections[section_id]
       sd_section = ses[:sections][i]
+      presets = presets_client_spec( section_spec[:presets] )
+      presets.unshift( [nil,@strings['default_preset']] ) unless presets.empty?
       hash['sections'].push({
         'title' => section.title,
         'description' => section.description,
@@ -75,7 +65,7 @@ class FreeBOMBS_App < GUIPlugin
         'enabled' => sd_section[:enabled].value_id,
         'count'   => sd_section[:count].value_id,
         'components' => components_client_spec( msg, sd_section[:components] ),
-        'presets' => presets_client_spec( section_spec[:presets] )
+        'presets' => presets
       })
     end
     hash
@@ -178,7 +168,7 @@ class FreeBOMBS_App < GUIPlugin
       section_values = {
         :id => section_spec[:id],
         :enabled => HValue.new( msg, section_spec[:checked], metadata ),
-        :count   => HValue.new( msg, section_spec[:count  ], metadata )
+        :count   => HValue.new( msg, section_spec[:value  ], metadata )
       }
       section_values[:enabled].bind( name_with_manager_s, :set_section_enabled )
       section_values[:count  ].bind( name_with_manager_s, :set_section_count   )
@@ -205,8 +195,45 @@ class FreeBOMBS_App < GUIPlugin
     recalculate( msg )
   end
 
+  def format_currency( price, decimal_places=3, currency=:EUR )
+    deci_round = 10**decimal_places
+    number_adjusted = (price*deci_round).round/deci_round.to_f
+    ( number_whole, number_deci ) = number_adjusted.to_s.split('.')
+    number_deci += '0' * ( decimal_places-number_deci.length )
+    number_string = number_whole+'.'+number_deci
+    if currency == :EUR
+      number_string += ' EUR'
+    elsif currency == :USD
+      number_string = '$'+number_string
+    end
+    number_string
+  end
   def recalculate( msg )
-    puts "should calculate now, but no output to do yet"
+    arr = []
+    data = user_data( msg )
+    multi = get_ses( msg, :multi ).data
+    arr.push ''
+    arr.push " Bill of materials for #{multi} configuration(s) of #{configurations.title}:"
+    arr.push ''
+    arr.push  " Component ID                      |  Units  |  Unit price  |      Price"
+    arr.push " ----------------------------------+---------+--------------+----------- "
+    price_list = calculator.calculate_price( data, multi )
+    price_sum = 0
+    price_list.each do |component_id, price_data |
+      ( units, unit_price, price ) = price_data
+      price_sum += price
+      component_ljust = component_id.to_s.ljust(32)
+      units_rjust = units.to_s.rjust(5)
+      unit_price_rjust = format_currency(unit_price, 3, data[:currency]).rjust( 10 )
+      price_rjust = format_currency(price,2, data[:currency]).rjust( 10 )
+      arr.push " #{component_ljust}  |  #{units_rjust}  |  #{unit_price_rjust}  | #{price_rjust}"
+    end
+    arr.push " ----------------------------------+---------+--------------+----------- "
+    sum_rjust = format_currency( price_sum, 2, data[:currency] ).rjust( 11 )
+    arr.push " Total:                                                     |#{sum_rjust}"
+    arr.push
+    str = arr.join('<br>')
+    get_ses( msg, :bom ).set( msg, str )    
   end
 
   def get_supplier( msg )

@@ -5,7 +5,7 @@
 .description p {
   margin-top: 0; margin-bottom: 0;
 }
-.description h1 { font-size: 20px; }
-.description h2 { font-size: 18px; }
-.description h3 { font-size: 16px; }
-.description h4 { font-size: 14px; }
+.description h1 { font-size: 16px; }
+.description h2 { font-size: 15px; }
+.description h3 { font-size: 14px; }
+.description h4 { font-size: 13px; }

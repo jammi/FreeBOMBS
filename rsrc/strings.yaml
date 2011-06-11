@@ -12,8 +12,14 @@ currencies:
   - 'Euro (&euro;)'
 - - USD
   - 'United States Dollar (US $)'
+export_button: Export BOM...
+print_button: Print BOM...
+default_preset: '(No preset selected)'
 configuration_layout:
   view_components: Show Components
   view_instructions: Assembly Instructions
   sections_title: 'Configurable Sections:'
   enable: Enable
+  count: 'Count:'
+  count_limits: 'Min: #{min}, Max: #{max}'
+  presets: 'Presets:'

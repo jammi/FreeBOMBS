@@ -2,7 +2,7 @@ var
 ConfigurationLayout = HView.extend({
   buildConfigSection: function( parent, section_spec, strings ){
     var
-    top = 32+this.drawDescriptionBox( 116, 32, parent, section_spec.description ),
+    top = 32+this.drawDescriptionBox( 96, 32, parent, section_spec.description ),
     enablerList = [ HSystem.views[parent.views[0]] ],
     checkBox = HCheckBox.extend({
       refreshValue: function(){
@@ -11,45 +11,72 @@ ConfigurationLayout = HView.extend({
           this.options.enablerList[i].setEnabled( this.value );
         }
       }
-    }).nu( [ 0, 8, 100, 24 ], parent, {
+    }).nu( [ 0, 8, 80, 24 ], parent, {
       valueObj: HVM.values[section_spec.enabled],
       label: strings.enable,
       enablerList: enablerList,
       style: {
-        'font-size': '16px',
         'font-weight': 'bold'
       }
     } );
-    enablerList.push( this.TextBox.nu( [ 116, 8, null, 24, 8, null ], parent, {
+    enablerList.push( this.TextBox.nu( [ 96, 8, null, 24, 8, null ], parent, {
       value: section_spec.title,
       style: {
-        'font-size': '18px',
+        'font-size': '16px',
         'font-weight': 'bold'
       }
     } ) );
-    enablerList.push( HNumericTextControl.nu( [ 116, top, 50, 22 ], parent, {
+    if( section_spec.presets.length > 0 ){
+      var
+      presetLabel = this.TextBox.nu( [ 96, top+3, 60, 20 ], parent, {
+        value: strings.presets
+      } ),
+      presetMenu = HPopupMenu.extend({
+        refreshValue: function(){
+          this.base();
+          if( typeof this.value == 'number' ){
+            this.options.countValue.set( this.value );
+          }
+        }
+      }).nu( [ 96+60, top, null, 24, 8, null ], parent, {
+        value: null,
+        countValue: HVM.values[section_spec.count]
+      } );
+      presetMenu.setListItems( section_spec.presets );
+      enablerList.push( presetLabel );
+      enablerList.push( presetMenu );
+      top += 28;
+    }
+    var
+    countLabel = this.TextBox.nu( [ 96, top+3, 60, 20 ], parent, {
+      value: strings.count
+    } );
+    enablerList.push( countLabel );
+    enablerList.push( HNumericTextControl.nu( [ 96+60, top, 50, 22 ], parent, {
       valueObj: HVM.values[ section_spec.count ],
       minValue: section_spec.min,
       maxValue: section_spec.max
     } ) );
-    enablerList.push( HStepper.nu( [ 166, top, 16, 22 ], parent, {
+    enablerList.push( HStepper.nu( [ 96+60+50, top, 16, 22 ], parent, {
       valueObj: HVM.values[ section_spec.count ],
       minValue: section_spec.min,
       maxValue: section_spec.max
+    } ) );
+    enablerList.push( this.TextBox.nu( [96+60+66, top+3, 200, 20], parent, {
+      value: strings.count_limits.replace('#{min}',section_spec.min).replace('#{max}',section_spec.max)
     } ) );
     enablerList.push( HButton.nu( [ null, top, 160, 24, 8, null ], parent, {
-      label: 'View Components'
+      label: strings.view_components
     } ) );
     top += 28;
     ELEM.setCSS( ELEM.make( parent.elemId ), 'position:absolute;top:'+top+'px;left:24px;height:1px;right:8px;background:#ccc;' );
-    console.log('section_spec:', section_spec);
     checkBox.refreshValue();
     return top;
   },
   buildConfigSections: function( top, section_specs, strings ){
     var
     scrollView = HScrollView.nu(
-      [ 0, top, null, null, 0, 0 ],
+      [ 24, top, null, null, 0, 0 ],
       this, {
         scrollX: false,
         scrollY: 'auto',
@@ -91,30 +118,26 @@ ConfigurationLayout = HView.extend({
     var
     configuration_data = this.options.items,
     strings = this.options.strings,
-    top_offset = 40,
-    buttonRect;
+    top = 40;
 
-    HStringView.nu( [ 8, 8, null, 32, 8, null ], this, {
+    HStringView.nu( [ 24, 8, null, 32, 8, null ], this, {
       value: configuration_data.title,
       style: {
         'font-weight': 'bold',
-        'font-size': '24px'
+        'font-size': '18px'
       }
     } );
-    top_offset += this.drawDescriptionBox( 24, top_offset, this, configuration_data.description );
-    buttonRect = HRect.nu( 24, top_offset, 192, top_offset+24 );
-    top_offset += 24 + 16;
-    HButton.nu( HRect.nu( buttonRect ), this, { label: strings.view_components } );
-    buttonRect.offsetBy( buttonRect.width, 0 );
-    HButton.nu( HRect.nu( buttonRect ), this, { label: strings.view_instructions, enabled: false } );
-    HStringView.nu( [ 24, top_offset, null, 24, 16, null ], this, {
+    top += this.drawDescriptionBox( 24, top, this, configuration_data.description );
+    HButton.nu( [null, top-8, 160, 24, 23, null], this, { label: strings.view_components } );
+    // top += 24 + 16;
+    HStringView.nu( [ 24, top, null, 24, 16, null ], this, {
       value: strings.sections_title,
       style: {
-        'font-size': '18px',
+        'font-size': '16px',
         'font-weight': 'bold'
       }
     } );
-    top_offset += 24;
-    this.buildConfigSections( top_offset, configuration_data.sections, strings );
+    top += 24;
+    this.buildConfigSections( top, configuration_data.sections, strings );
   }
 });

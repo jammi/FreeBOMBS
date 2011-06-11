@@ -12,3 +12,5 @@ multi:
 supplier:
   msg_call: get_supplier
   restore: false
+bom:
+  data: []
