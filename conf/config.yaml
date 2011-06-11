@@ -5,10 +5,20 @@
   - ./lib
 :transporter_conf:
   :client_autoreload: true
+  :client_poll_priority: 100
+:main_plugin:
+  :server_poll_interval: 1000
+:daemon:
+  :http_delayed_start: 2
+:session_conf:
+  :disposable_keys: true
+  :session_cookies: false
+  :clone_cookie_sessions: false
+:database:
+  :ses_db: 'sqlite://run/session.db'
 # FreeBOMBS-specific config:
 freebombs:
   dbs_path: ./dbs
   db_name: test
   locale_strings: ./rsrc/strings.yaml
   currency: EUR
-

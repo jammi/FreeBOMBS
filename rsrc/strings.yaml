@@ -22,4 +22,15 @@ configuration_layout:
   enable: Enable
   count: 'Count:'
   count_limits: 'Min: #{min}, Max: #{max}'
+  component_table_count: Count
+  component_table_component_id: Component ID
+  component_table_component_title: Component Title
   presets: 'Presets:'
+  component_window_prefix: 'Component details for section: '
+  component_details_help: |
+    ## List of components for #{title}
+    You may view and customize the components
+    of the #{title} section here.
+    The count is per set. Use the count of the
+    section to define how many sets like this you
+    want.

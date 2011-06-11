@@ -1,9 +1,24 @@
 
-title: FreeEMS Puma Spin 1
+title: Test product
 description: |
   # Introduction
-  This BOM is highly experimental, proceed at your own risk!
-  The baseline configuration includes only a set of bare minimum parts.
+  This database is just an example. Don't use it for any actual products.
+  
+  ## Formatting
+  The description supports Markdown formatting.
+
+  * A list
+  * Of items
+    * List indentation
+    * Like this
+      * And even this
+  
+  *Code sample:*
+  
+      puts "Hello, world"
+  
+  [Links are defined like this](https://github.com/jammi/FreeBOMBS)
+
 components:
   - 'MCR10EZPF1001'
   - 'RSF200JB-1R0'
@@ -79,7 +94,7 @@ sections:
     checked: false
     excludes:
       - USB-CONN2
-    value: 0
+    value: 1
     min: 0
     max: 1
     components:
@@ -122,7 +137,7 @@ sections:
         value: 4
     checked: true
     excludes: INJ-L
-    value: 0
+    value: 4
     min: 0
     max: 8
     components:
@@ -150,7 +165,7 @@ sections:
         value: 4
     checked: false
     excludes: INJ-H
-    value: 0
+    value: 4
     min: 0
     max: 8
     components:
@@ -176,8 +191,8 @@ sections:
         value: 2
       - title: "Sequential for 4-cylinder engines"
         value: 4
-    checked: false
-    value: 0
+    checked: true
+    value: 2
     min: 0
     max: 4
     components:
@@ -197,7 +212,7 @@ sections:
       - title: "Dual RPM input, like crank + cam"
         value: 2
     checked: true
-    value: 1
+    value: 2
     min: 0
     max: 2
     components:
@@ -209,11 +224,11 @@ sections:
     title: Boosted MAP input circuits and MAP sensor
     description: |
       You don't need this, unless you are going to read boost levels from a supercharger or turbo. It includes an MPX4250AP sensor.
-    checked: false
+    checked: true
     excludes:
       - MAPN
       - MAF
-    value: 0
+    value: 1
     min: 0
     max: 1
     components:
@@ -227,7 +242,7 @@ sections:
     title: Regular vacuum MAP sensor and its input circuit.
     description: |
       You'll want this to read the vacuum levels from your inlet manifold. It includes an MPX4100AP sensor.
-    checked: true
+    checked: false
     excludes:
       - MAPB
       - MAF
@@ -261,7 +276,7 @@ sections:
     excludes:
       - MAPN
       - MAPB
-    value: 0
+    value: 1
     min: 0
     max: 1
     components:
@@ -272,7 +287,7 @@ sections:
     description: |
       It's not known, whether this circuit works or not.
     checked: false
-    value: 0
+    value: 2
     min: 0
     max: 2
     components:
@@ -293,11 +308,12 @@ sections:
     title: Thermocouple driver IC
     description: |
       This option is not supported properly, so don't check this option.
+      
       * In Spin1, this one is a bit crippled.
         * It only supports up to 500°C temperatures as-it's currently configured.
         * The EGT would support up to 1200°C, if it would be supplied with 12V instead of 5V
     checked: false
-    value: 0
+    value: 1
     min: 0
     max: 1
     components:
@@ -308,6 +324,7 @@ sections:
     description: |
       ## NOTE: Includes no parts!
       In most cases, you'll use two:
+
       * One for the inlet air temperature sensor.
       * Another for the coolant temperature sensor.
     checked: true
@@ -320,7 +337,7 @@ sections:
       ## NOTE: Includes no parts!
       Not supported.
     checked: false
-    value: 0
+    value: 1
     min: 0
     max: 1
   STP:
@@ -329,7 +346,7 @@ sections:
       ## NOTE: Includes no parts!
       Untested and no firmware support.
     checked: false
-    value: 0
+    value: 1
     min: 0
     max: 1
   ANP:
@@ -352,7 +369,7 @@ sections:
       ## Keep this disabled at all times, unless you know what you are doing!
       Protection zeners (5v1, SOD123 package). Has some known issues.
     checked: false
-    value: 0
+    value: 12
     min: 0
     max: 12
     components:

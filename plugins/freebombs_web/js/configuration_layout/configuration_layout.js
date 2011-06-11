@@ -65,9 +65,14 @@ ConfigurationLayout = HView.extend({
     enablerList.push( this.TextBox.nu( [96+60+66, top+3, 200, 20], parent, {
       value: strings.count_limits.replace('#{min}',section_spec.min).replace('#{max}',section_spec.max)
     } ) );
-    enablerList.push( HButton.nu( [ null, top, 160, 24, 8, null ], parent, {
-      label: strings.view_components
-    } ) );
+    if( section_spec.components.length > 0 ){
+      enablerList.push( ComponentButton.nu( [ null, top, 160, 24, 8, null ], parent, {
+        label: strings.view_components,
+        spec: section_spec.components,
+        strings: strings,
+        section_title: section_spec.title
+      } ) );
+    }
     top += 28;
     ELEM.setCSS( ELEM.make( parent.elemId ), 'position:absolute;top:'+top+'px;left:24px;height:1px;right:8px;background:#ccc;' );
     checkBox.refreshValue();
@@ -128,14 +133,18 @@ ConfigurationLayout = HView.extend({
       }
     } );
     top += this.drawDescriptionBox( 24, top, this, configuration_data.description );
-    HButton.nu( [null, top-8, 160, 24, 23, null], this, { label: strings.view_components } );
-    // top += 24 + 16;
     HStringView.nu( [ 24, top, null, 24, 16, null ], this, {
       value: strings.sections_title,
       style: {
         'font-size': '16px',
         'font-weight': 'bold'
       }
+    } );
+    ComponentButton.nu( [null, top-8, 160, 24, 23, null], this, {
+      label: strings.view_components,
+      spec: configuration_data.components,
+      strings: strings,
+      section_title: 'Baseline'
     } );
     top += 24;
     this.buildConfigSections( top, configuration_data.sections, strings );

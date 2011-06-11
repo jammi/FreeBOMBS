@@ -10,10 +10,38 @@ class FreeBOMBS_App < GUIPlugin
   def suppliers; @opt[:suppliers]; end
   def calculator; @calculator; end
 
+  def md( md_src )
+    return md_src unless $md_to_html
+    html = BlueCloth.new( md_src ).to_html
+    if html.start_with?('<p>') and html.end_with?('</p>') and html.rindex('<p>') == 0
+      html = html[3..-5]
+    end
+    html
+  end
+  def process_md( strs )
+    if strs.class == Array
+      strs.each_with_index do |str,i|
+        if str.class == String
+          strs[i] = md( str )
+        elsif [Array,Hash].include? str.class
+          process_md( str )
+        end
+      end
+    elsif strs.class == Hash
+      strs.each do |name,str|
+        if str.class == String
+          strs[name] = md( str )
+        elsif [Array,Hash].include? str.class
+          process_md( str )
+        end
+      end
+    end
+  end
+
   def open
     super
     @conf = RSence.config['freebombs']
-    @strings = YAML.load_file( @conf['locale_strings'] )
+    @strings = process_md( YAML.load_file( @conf['locale_strings'] ) )
     @opt = FreeBOMBS.init_web( @conf['db_name'], @conf, @strings )
     @currencies_list = @strings['currencies']
     @calculator = FreeBOMBS::Calculator.new( @opt )
@@ -124,8 +152,6 @@ class FreeBOMBS_App < GUIPlugin
     orig = metadata[:enabled]
     if [ true, false ].include? data and data != orig
       metadata[:checked] = data
-      puts metadata.inspect
-      puts metadata[:excludes].inspect
       unless metadata[:excludes].empty?
         disable_sections( msg, metadata[:excludes] )
       end
@@ -243,7 +269,6 @@ class FreeBOMBS_App < GUIPlugin
     ud = user_data( msg )
     ud[:supplier] = value.data.to_sym if ud[:suppliers].include? value.data.to_sym
     recalculate( msg )
-    puts "supplier set to: #{value.data}"
     true
   end
   
@@ -254,7 +279,6 @@ class FreeBOMBS_App < GUIPlugin
     data = 100 if data > 100
     value.set( msg, data ) unless value.data == data
     recalculate( msg )
-    puts "multiplier set to: #{value.data}"
     true
   end
   
@@ -267,7 +291,6 @@ class FreeBOMBS_App < GUIPlugin
     end
     user_data( msg )[:currency] = value.data.to_sym
     recalculate( msg )
-    puts "currency set to: #{value.data}"
     true
   end
 end

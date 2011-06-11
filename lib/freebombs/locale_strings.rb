@@ -12,7 +12,7 @@ module FreeBOMBS
     def md( md_src )
       return md_src unless $md_to_html
       html = BlueCloth.new( md_src ).to_html
-      if html.start_with?('<p>') and html.end_with?('</p>')
+      if html.start_with?('<p>') and html.end_with?('</p>') and html.rindex('<p>') == 0
         html = html[3..-5]
       end
       html
