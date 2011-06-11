@@ -40,6 +40,7 @@ class FreeBOMBS_App < GUIPlugin
 
   def open
     super
+    @msie_ui = GUIParser.new( self, file_read('gui-MSIE.yaml'), @name )
     @conf = RSence.config['freebombs']
     @strings = process_md( YAML.load_file( @conf['locale_strings'] ) )
     @opt = FreeBOMBS.init_web( @conf['db_name'], @conf, @strings )
@@ -108,6 +109,13 @@ class FreeBOMBS_App < GUIPlugin
       :currencies => @currencies_list
     }
     params
+  end
+  def init_ui( msg )
+    if msg.user_info[:msie]
+      @msie_ui.init( msg, {} )
+    else
+      super
+    end
   end
   def user_data( msg )
     msg.user_info[:freebombs]
@@ -214,6 +222,9 @@ class FreeBOMBS_App < GUIPlugin
     init_dynamic_section_values( msg, ud[:sections], ses[:sections] )
   end
   def init_ses( msg )
+    msg.user_info = {
+      :msie => msg.request.header['user-agent'].include?('MSIE')
+    }
     msg.user_info = {} unless msg.user_info.class == Hash
     msg.user_info[:freebombs] = configurations.export
     super

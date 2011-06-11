@@ -1,0 +1,27 @@
+type: GUITree
+version: 0.8
+dependencies:
+- default_theme
+- controls
+
+class: RSence.GUIApp
+options:
+  title: IE is broken.
+
+subviews:
+- class: HSheet
+  rect: [ 0, 0, 600, 400 ]
+  subviews:
+  - class: HImageView
+    rect: [ 46, 166, 507, 226 ]
+    options:
+      value: '/img/internet_explorer_is.png'
+  - class: HView
+    rect: [ 8, 8, 584, 158 ]
+    options:
+      html: |
+        <h1>Internet Explorer is broken!</h1>
+        <p>Do yourself and the Internet a favour:</p>
+        <p>Explore the web with proper web browser.</p>
+      style:
+        text-align: center
