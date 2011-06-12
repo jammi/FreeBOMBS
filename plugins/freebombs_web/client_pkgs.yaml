@@ -3,5 +3,6 @@
 :packages:
   custom_layouts:
   - settings_layout
+  - overview_layout
   - configuration_layout
   - component_layout

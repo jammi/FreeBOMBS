@@ -1,5 +1,6 @@
 # Default english string locale
 data_sheet: Data Sheet
+overview_title: Overview
 configuration_title: Configurations
 settings_title: Preferences
 currency_label: 'Currency:'
@@ -16,7 +17,12 @@ export_button: Export BOM...
 print_button: Print BOM...
 default_preset: '(No preset selected)'
 configuration_layout:
-  view_components: Show Components
+  configurations_title: Configurable options
+  configurations_help: |
+    These sections contain optional components.
+    Select the ones that apply to your configuration.
+  base_components: Baseline Components
+  view_components: Section Components
   view_instructions: Assembly Instructions
   sections_title: 'Configurable Sections:'
   enable: Enable

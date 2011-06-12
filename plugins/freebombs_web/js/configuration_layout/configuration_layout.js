@@ -124,24 +124,18 @@ ConfigurationLayout = HView.extend({
     configuration_data = this.options.items,
     strings = this.options.strings,
     top = 40;
-
     HStringView.nu( [ 24, 8, null, 32, 8, null ], this, {
-      value: configuration_data.title,
+      value: strings.configurations_title,
       style: {
         'font-weight': 'bold',
         'font-size': '18px'
       }
     } );
-    top += this.drawDescriptionBox( 24, top, this, configuration_data.description );
-    HStringView.nu( [ 24, top, null, 24, 16, null ], this, {
-      value: strings.sections_title,
-      style: {
-        'font-size': '16px',
-        'font-weight': 'bold'
-      }
+    HStringView.nu( [24, 32, null, 32, 200, null ], this, {
+      value: strings.configurations_help
     } );
     ComponentButton.nu( [null, top-8, 160, 24, 23, null], this, {
-      label: strings.view_components,
+      label: strings.base_components,
       spec: configuration_data.components,
       strings: strings,
       section_title: 'Baseline'

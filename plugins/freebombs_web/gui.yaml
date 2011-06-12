@@ -28,6 +28,18 @@ subviews:
     - class: HTabItem
       rect: auto
       options:
+        label: :strings.overview_title
+      subviews:
+        - class: OverviewLayout
+          rect: [ 8, 8, ~, ~, 8, 8 ]
+          options:
+            style:
+              border: '1px solid #ccc'
+            items: :configuration_data
+            strings: :strings.configuration_layout
+    - class: HTabItem
+      rect: auto
+      options:
         label: :strings.configuration_title
       subviews:
         - class: ConfigurationLayout
