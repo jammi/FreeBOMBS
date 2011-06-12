@@ -12,7 +12,7 @@ options:
   label: :app_title
 subviews:
 - class: HView
-  rect: [ 0, 0, 960, 400, 0, 0 ]
+  rect: [ 0, 0, 960, 500, 0, 0 ]
   subviews:
   - class: HStringView
     rect: [ 8, 8, ~, 32, 8, ~ ]
@@ -62,48 +62,38 @@ subviews:
               value: :values.multi
               min: 1
               max: 100
-  - class: HView
+  - class: HScrollView
     rect: [ 616, 43, ~, ~, 8, 42 ]
     options:
+      scrollX: auto
+      scrollY: auto
       style:
         border: '1px solid #888'
     subviews:
-    - class: HStringView
-      rect: [ 8, 3, ~, 20, 8, ~ ]
-      options:
-        value: :strings.bom_title
-        style:
-          font-weight: bold
-    - class: HScrollView
-      rect: [ 0, 32, ~, ~, 0, 0 ]
-      options:
-        scrollX: auto
-        scrollY: auto
-      subviews:
-      - class: HControl
-        extend:
-          defaultEvents:
-            contextMenu: true
-          contextMenu: 'function(){return true;}'
-          isAbsolute: false
-          isRelative: true,
-          displayMode: inline,
-          refreshValue: |
-            function(){
-              this.base();
-              if( typeof this.value == 'string' ){
-                this.setHTML( '<pre>'+this.value+'</pre>' );
-              }
+    - class: HControl
+      extend:
+        defaultEvents:
+          contextMenu: true
+        contextMenu: 'function(){return true;}'
+        isAbsolute: false
+        isRelative: true
+        displayMode: inline
+        refreshValue: |
+          function(){
+            this.base();
+            if( typeof this.value == 'string' ){
+              this.setHTML( '<pre>'+this.value+'</pre>' );
             }
-        rect: [ 0, 0, ~, ~, 0, 0 ]
-        bind: :values.bom
-- class: HButton
-  rect: [ ~, ~, 100, 24, 8, 8 ]
-  options:
-    label: :strings.export_button
-    enabled: false
-- class: HButton
-  rect: [ ~, ~, 100, 24, 116, 8 ]
-  options:
-    label: :strings.print_button
-    enabled: false
+          }
+      rect: [ 0, 0, ~, ~, 0, 0 ]
+      bind: :values.bom
+  - class: HButton
+    rect: [ ~, ~, 100, 24, 8, 8 ]
+    options:
+      label: :strings.export_button
+      enabled: false
+  - class: HButton
+    rect: [ ~, ~, 100, 24, 116, 8 ]
+    options:
+      label: :strings.print_button
+      enabled: false

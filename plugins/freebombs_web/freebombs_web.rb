@@ -221,9 +221,17 @@ class FreeBOMBS_App < GUIPlugin
     ses[:sections] = []
     init_dynamic_section_values( msg, ud[:sections], ses[:sections] )
   end
+  def is_msie?( ua, min_version=6.0 )
+    ie_match = ua.match(/MSIE\ ([0-9]+?)\.([0-9]+)\;/)
+    if ie_match
+      version = ie_match[1].to_i+(ie_match[2].to_f/10)
+      return min_version > version
+    end
+    false
+  end
   def init_ses( msg )
     msg.user_info = {
-      :msie => msg.request.header['user-agent'].include?('MSIE')
+      :msie => is_msie?(msg.request.header['user-agent'])
     }
     msg.user_info = {} unless msg.user_info.class == Hash
     msg.user_info[:freebombs] = configurations.export

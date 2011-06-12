@@ -14,3 +14,4 @@ supplier:
   restore: false
 bom:
   data: []
+  restore: false
