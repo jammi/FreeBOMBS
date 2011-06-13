@@ -10,6 +10,7 @@ dependencies:
 class: RSence.GUIApp
 options:
   label: :app_title
+  component_db: :component_db
 subviews:
 - class: HView
   rect: [ 0, 0, 960, 500, 0, 0 ]

@@ -8,7 +8,7 @@ module FreeBOMBS; class Components
 
   class ComponentBase
     include LocaleMethods
-    attr_reader :id, :title, :descr, :img
+    attr_reader :id, :title, :descr, :img, :datasheet
     def has_img?
       ( not @img.nil? )
     end
@@ -22,7 +22,7 @@ module FreeBOMBS; class Components
         @descr += md( spec['description'] )
       end
       if spec.has_key? 'datasheet'
-        @descr += %{<a href="#{spec['datasheet']}" target="_new">#{str.data_sheet}</a>}
+        @datasheet = spec['datasheet']
       end
       @img = spec['img_src']
       if spec['replacement'].nil?
@@ -45,6 +45,18 @@ module FreeBOMBS; class Components
       @opt[:suppliers]
     end
     def obsolete?; false; end
+    def export_to_client
+      { 'obsolete' => obsolete?,
+        'replacement' => has_replacement? ? replacement.id : nil,
+        'id' => id,
+        'title' => title,
+        'description' => descr,
+        'img' => img,
+        'datasheet' => datasheet
+        # ,
+        # 'supplier_ids' => component.export_supplier_ids
+      }
+    end
     def to_s; "#<Component #{@id.inspect}: @title=#{@title.inspect}>"; end
   end
 
@@ -93,7 +105,15 @@ module FreeBOMBS; class Components
     end
     @components[ component_id ]
   end
-  
+
+  def export_to_client
+    hash = {}
+    @components.each do |component_id,component|
+      hash[component_id.to_s] = component.export_to_client
+    end
+    hash
+  end
+
   def setup
     @components = {}
     db.components.each do |component_id, component_spec|

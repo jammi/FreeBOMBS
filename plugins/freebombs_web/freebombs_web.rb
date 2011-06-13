@@ -37,7 +37,6 @@ class FreeBOMBS_App < GUIPlugin
       end
     end
   end
-
   def open
     super
     @msie_ui = GUIParser.new( self, file_read('gui-MSIE.yaml'), @name )
@@ -46,6 +45,7 @@ class FreeBOMBS_App < GUIPlugin
     @opt = FreeBOMBS.init_web( @conf['db_name'], @conf, @strings )
     @currencies_list = @strings['currencies']
     @calculator = FreeBOMBS::Calculator.new( @opt )
+    @client_component_db = @opt[:components].export_to_client
   end
   def suppliers_list( msg )
     arr = []
@@ -104,6 +104,7 @@ class FreeBOMBS_App < GUIPlugin
     params[:strings] = @strings
     params[:app_title] = 'FreeBOMBS'
     params[:configuration_data] = config_data_client_spec( msg )
+    params[:component_db] = @client_component_db
     params[:lists] = {
       :suppliers => suppliers_list( msg ),
       :currencies => @currencies_list

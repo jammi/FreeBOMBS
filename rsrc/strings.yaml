@@ -29,8 +29,9 @@ configuration_layout:
   count: 'Count:'
   count_limits: 'Min: #{min}, Max: #{max}'
   component_table_count: Count
-  component_table_component_id: Component ID
-  component_table_component_title: Component Title
+  component_table_component_id: Manufacturer ID
+  component_table_component_title: Title
+  component_table_component_descr: Description
   presets: 'Presets:'
   component_window_prefix: 'Component details for section: '
   component_details_help: |

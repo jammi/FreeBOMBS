@@ -92,15 +92,18 @@ ConfigurationLayout = HView.extend({
     ),
     i = 0,
     section_spec;
-    top = 0;
+    top = 0, prevTop = 0;
     this.sectionViews = [];
     for(; i < section_specs.length; i++){
       section_spec = section_specs[i];
       this.sectionViews[i] = HView.nu(
-        [ 0, top, null, 200, 0, null ],
+        [ 0, top, null, 10, 0, null ],
         scrollView
       );
+      prevTop = top;
       top += this.buildConfigSection( this.sectionViews[i], section_spec, strings );
+      this.sectionViews[i].rect.setHeight( top-prevTop+1 );
+      this.sectionViews[i].drawRect();
     }
   },
   TextBox: HStringView.extend({
