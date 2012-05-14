@@ -61,6 +61,7 @@ ComponentButton = HButton.extend({
       }
     },
     drawSubviews: function(){
+      this.base();
       var
       opt = this.options,
       spec = opt.spec,
@@ -205,6 +206,7 @@ ComponentButton = HButton.extend({
           minSize: [ 400, 300 ]
         }
       );
+      console.log('this.componentView.options.closeButton => ',this.componentView.options.closeButton);
     }
   }
 });

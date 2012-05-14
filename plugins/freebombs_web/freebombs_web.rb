@@ -1,4 +1,3 @@
-
 # Copyright 2011 Juha-Jarmo Heinonen <o@sorsacode.com>
 
 require 'freebombs'
@@ -230,12 +229,21 @@ class FreeBOMBS_App < GUIPlugin
     end
     false
   end
-  def init_ses( msg )
+  def init_user_info( msg )
     msg.user_info = {
       :msie => is_msie?(msg.request.header['user-agent'])
     }
     msg.user_info = {} unless msg.user_info.class == Hash
     msg.user_info[:freebombs] = configurations.export
+  end
+  def restore_ses( msg )
+    init_user_info( msg )
+    super
+    init_dynamic_values( msg )
+    recalculate( msg )
+  end
+  def init_ses( msg )
+    init_user_info( msg )
     super
     init_dynamic_values( msg )
     recalculate( msg )
@@ -314,4 +322,3 @@ class FreeBOMBS_App < GUIPlugin
     true
   end
 end
-

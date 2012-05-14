@@ -19,6 +19,6 @@
 # FreeBOMBS-specific config:
 freebombs:
   dbs_path: ./dbs
-  db_name: test
+  db_name: freeems-puma-spin1
   locale_strings: ./rsrc/strings.yaml
   currency: EUR
